@@ -1,0 +1,38 @@
+plugins {
+  id "java"
+  id "application"
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
+}
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+[compileJava, compileTestJava]*.options.collect {options ->
+  options.debug = true
+  options.deprecation = true
+  options.compilerArgs.add '-Xlint'
+  options.compilerArgs.add '-Xlint:-unchecked'
+  options.compilerArgs.add '-Xlint:-serial'
+  options.compilerArgs.add '-Xlint:-rawtypes'
+  options.compilerArgs.add '-Xlint:-processing'
+}
+
+description = 'SunFlow Rendering System'
+
+
+
+application {
+    mainClass =  "SunflowGUI"
+}
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+   implementation group: 'org.codehaus.janino', name: 'janino', version: '2.6.1'
+}
