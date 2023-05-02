@@ -109,7 +109,7 @@ public final class MovingMatrix4 {
             float nt = (MathUtils.clamp(time, t0, t1) - t0) * inv;
             int idx0 = (int) nt;
             int idx1 = Math.min(idx0 + 1, transforms.length - 1);
-            return Matrix4.blend(transforms[idx0], transforms[idx1], (float) (nt - idx0));
+            return Matrix4.blend(transforms[idx0], transforms[idx1], nt - idx0);
         }
     }
 }

@@ -45,11 +45,8 @@ public final class Plugins<T> {
             return null;
         }
         try {
-            return c.newInstance();
-        } catch (InstantiationException e) {
-            UI.printError(Module.API, "Cannot create object of type \"%s\" - %s", name, e.getLocalizedMessage());
-            return null;
-        } catch (IllegalAccessException e) {
+            return c.getDeclaredConstructor().newInstance();
+        } catch (ReflectiveOperationException e) {
             UI.printError(Module.API, "Cannot create object of type \"%s\" - %s", name, e.getLocalizedMessage());
             return null;
         }
@@ -100,9 +97,9 @@ public final class Plugins<T> {
             ClassBodyEvaluator cbe = new ClassBodyEvaluator();
             cbe.setClassName(name);
             if (baseClass.isInterface())
-                cbe.setImplementedTypes(new Class[] { baseClass });
+                cbe.setImplementedInterfaces(new Class[] { baseClass });
             else
-                cbe.setExtendedType(baseClass);
+                cbe.setExtendedClass(baseClass);
             cbe.cook(sourceCode);
             return registerPlugin(name, cbe.getClazz());
         } catch (CompileException e) {
