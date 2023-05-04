@@ -175,6 +175,7 @@ public class ImagePanel extends JPanel implements Display {
         }
     }
 
+    @Override
     public synchronized void imageBegin(int w, int h, int bucketSize) {
         if (image != null && w == image.getWidth() && h == image.getHeight()) {
             // dull image if it has same resolution (75%)
@@ -196,6 +197,7 @@ public class ImagePanel extends JPanel implements Display {
         repaint();
     }
 
+    @Override
     public synchronized void imagePrepare(int x, int y, int w, int h, int id) {
         int border = BORDERS[id % BORDERS.length] | 0xFF000000;
         for (int by = 0; by < h; by++) {
@@ -212,6 +214,7 @@ public class ImagePanel extends JPanel implements Display {
         repaint();
     }
 
+    @Override
     public synchronized void imageUpdate(int x, int y, int w, int h, Color[] data, float[] alpha) {
         for (int j = 0, index = 0; j < h; j++)
             for (int i = 0; i < w; i++, index++)
@@ -219,6 +222,7 @@ public class ImagePanel extends JPanel implements Display {
         repaint();
     }
 
+    @Override
     public synchronized void imageFill(int x, int y, int w, int h, Color c, float alpha) {
         int rgba = c.copy().mul(1.0f / alpha).toNonLinear().toRGBA(alpha);
         for (int j = 0, index = 0; j < h; j++)
@@ -227,6 +231,7 @@ public class ImagePanel extends JPanel implements Display {
         fastRepaint();
     }
 
+    @Override
     public void imageEnd() {
         repaint();
     }

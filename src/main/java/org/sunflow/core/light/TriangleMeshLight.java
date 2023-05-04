@@ -93,6 +93,7 @@ public class TriangleMeshLight extends TriangleMesh implements Shader, LightSour
         return true;
     }
 
+    @Override
     public Color getRadiance(ShadingState state) {
         if (!state.includeLights())
             return Color.BLACK;
@@ -101,18 +102,22 @@ public class TriangleMeshLight extends TriangleMesh implements Shader, LightSour
         return state.isBehind() ? Color.BLACK : radiance;
     }
 
+    @Override
     public void scatterPhoton(ShadingState state, Color power) {
         // do not scatter photons
     }
 
+    @Override
     public Instance createInstance() {
         return Instance.createTemporary(this, null, this);
     }
 
+    @Override
     public int getNumSamples() {
         return numSamples * getNumPrimitives();
     }
 
+    @Override
     public void getPhoton(double randX1, double randY1, double randX2, double randY2, Point3 p, Vector3 dir, Color power) {
         double rnd = randX1 * totalArea;
         int j = areas.length - 1;
@@ -146,10 +151,12 @@ public class TriangleMeshLight extends TriangleMesh implements Shader, LightSour
         Color.mul((float) Math.PI * areas[j], radiance, power);
     }
 
+    @Override
     public float getPower() {
         return radiance.copy().mul((float) Math.PI * totalArea).getLuminance();
     }
 
+    @Override
     public void getSamples(ShadingState state) {
         if (numSamples == 0)
             return;

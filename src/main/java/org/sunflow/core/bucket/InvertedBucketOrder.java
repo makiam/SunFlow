@@ -9,6 +9,7 @@ public class InvertedBucketOrder implements BucketOrder {
         this.order = order;
     }
 
+    @Override
     public int[] getBucketSequence(int nbw, int nbh) {
         int[] coords = order.getBucketSequence(nbw, nbh);
         for (int i = 0; i < coords.length / 2; i += 2) {

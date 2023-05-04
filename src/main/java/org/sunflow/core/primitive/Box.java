@@ -21,6 +21,7 @@ public class Box implements PrimitiveList {
         maxX = maxY = maxZ = +1;
     }
 
+    @Override
     public boolean update(ParameterList pl, SunflowAPI api) {
         FloatParameter pts = pl.getPointArray("points");
         if (pts != null) {
@@ -38,6 +39,7 @@ public class Box implements PrimitiveList {
         return true;
     }
 
+    @Override
     public void prepareShadingState(ShadingState state) {
         state.init();
         state.getRay().getPoint(state.getPoint());
@@ -71,6 +73,7 @@ public class Box implements PrimitiveList {
         state.setModifier(state.getInstance().getModifier(0));
     }
 
+    @Override
     public void intersectPrimitive(Ray r, int primID, IntersectionState state) {
         float intervalMin = Float.NEGATIVE_INFINITY;
         float intervalMax = Float.POSITIVE_INFINITY;
@@ -160,10 +163,12 @@ public class Box implements PrimitiveList {
         }
     }
 
+    @Override
     public int getNumPrimitives() {
         return 1;
     }
 
+    @Override
     public float getPrimitiveBound(int primID, int i) {
         switch (i) {
             case 0:
@@ -183,6 +188,7 @@ public class Box implements PrimitiveList {
         }
     }
 
+    @Override
     public BoundingBox getWorldBounds(Matrix4 o2w) {
         BoundingBox bounds = new BoundingBox(minX, minY, minZ);
         bounds.include(maxX, maxY, maxZ);
@@ -191,6 +197,7 @@ public class Box implements PrimitiveList {
         return o2w.transform(bounds);
     }
 
+    @Override
     public PrimitiveList getBakingPrimitives() {
         return null;
     }

@@ -14,6 +14,7 @@ public class PerlinModifier implements Modifier {
     private float scale = 50;
     private float size = 1;
 
+    @Override
     public boolean update(ParameterList pl, SunflowAPI api) {
         function = pl.getInt("function", function);
         size = pl.getFloat("size", size);
@@ -21,6 +22,7 @@ public class PerlinModifier implements Modifier {
         return true;
     }
 
+    @Override
     public void modify(ShadingState state) {
         Point3 p = state.transformWorldToObject(state.getPoint());
         p.x *= size;

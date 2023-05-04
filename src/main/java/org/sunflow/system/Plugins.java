@@ -24,7 +24,7 @@ public final class Plugins<T> {
      * @param baseClass
      */
     public Plugins(Class<T> baseClass) {
-        pluginClasses = new FastHashMap<String, Class<? extends T>>();
+        pluginClasses = new FastHashMap<>();
         this.baseClass = baseClass;
     }
 

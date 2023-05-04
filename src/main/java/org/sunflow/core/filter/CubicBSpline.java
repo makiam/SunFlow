@@ -3,10 +3,12 @@ package org.sunflow.core.filter;
 import org.sunflow.core.Filter;
 
 public class CubicBSpline implements Filter {
+    @Override
     public float get(float x, float y) {
         return B3(x) * B3(y);
     }
 
+    @Override
     public float getSize() {
         return 4;
     }

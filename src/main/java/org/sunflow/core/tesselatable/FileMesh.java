@@ -34,12 +34,14 @@ public class FileMesh implements Tesselatable {
     private String filename = null;
     private boolean smoothNormals = false;
 
+    @Override
     public BoundingBox getWorldBounds(Matrix4 o2w) {
         // world bounds can't be computed without reading file
         // return null so the mesh will be loaded right away
         return null;
     }
 
+    @Override
     public PrimitiveList tesselate() {
         if (filename.endsWith(".ra3")) {
             try {
@@ -215,6 +217,7 @@ public class FileMesh implements Tesselatable {
         return null;
     }
 
+    @Override
     public boolean update(ParameterList pl, SunflowAPI api) {
         String file = pl.getString("filename", null);
         if (file != null)

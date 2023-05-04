@@ -3,10 +3,12 @@ package org.sunflow.core.filter;
 import org.sunflow.core.Filter;
 
 public class SincFilter implements Filter {
+    @Override
     public float getSize() {
         return 4;
     }
 
+    @Override
     public float get(float x, float y) {
         return sinc1d(x) * sinc1d(y);
     }

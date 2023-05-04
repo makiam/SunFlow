@@ -480,6 +480,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                         jPanel1.add(renderButton);
                         renderButton.setText("Render");
                         renderButton.addActionListener(new ActionListener() {
+                            @Override
                             public void actionPerformed(ActionEvent evt) {
                                 renderMenuItemActionPerformed(evt);
                             }
@@ -490,6 +491,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                         jPanel1.add(iprButton);
                         iprButton.setText("IPR");
                         iprButton.addActionListener(new ActionListener() {
+                            @Override
                             public void actionPerformed(ActionEvent evt) {
                                 iprMenuItemActionPerformed(evt);
                             }
@@ -538,6 +540,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                         jPanel3.add(buildButton);
                         buildButton.setText("Build Scene");
                         buildButton.addActionListener(new ActionListener() {
+                            @Override
                             public void actionPerformed(ActionEvent evt) {
                                 buildMenuItemActionPerformed(evt);
                             }
@@ -598,6 +601,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                             taskCancelButton.setText("Cancel");
                             taskCancelButton.setEnabled(false);
                             taskCancelButton.addActionListener(new ActionListener() {
+                                @Override
                                 public void actionPerformed(ActionEvent evt) {
                                     UI.taskCancel();
                                 }
@@ -608,6 +612,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                             jPanel5.add(clearConsoleButton);
                             clearConsoleButton.setText("Clear");
                             clearConsoleButton.addActionListener(new ActionListener() {
+                                @Override
                                 public void actionPerformed(ActionEvent evt) {
                                     clearConsole();
                                 }
@@ -632,6 +637,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                     newFileMenuItem.setText("New");
                     newFileMenuItem.setAccelerator(KeyStroke.getKeyStroke("ctrl N"));
                     newFileMenuItem.addActionListener(new ActionListener() {
+                        @Override
                         public void actionPerformed(ActionEvent evt) {
                             newFileMenuItemActionPerformed(evt);
                         }
@@ -643,6 +649,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                     openFileMenuItem.setText("Open ...");
                     openFileMenuItem.setAccelerator(KeyStroke.getKeyStroke("ctrl O"));
                     openFileMenuItem.addActionListener(new ActionListener() {
+                        @Override
                         public void actionPerformed(ActionEvent evt) {
                             openFileMenuItemActionPerformed(evt);
                         }
@@ -654,6 +661,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                     saveMenuItem.setText("Save");
                     saveMenuItem.setAccelerator(KeyStroke.getKeyStroke("ctrl S"));
                     saveMenuItem.addActionListener(new ActionListener() {
+                        @Override
                         public void actionPerformed(ActionEvent evt) {
                             saveCurrentFile(currentFile);
                         }
@@ -664,6 +672,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                     fileMenu.add(saveAsMenuItem);
                     saveAsMenuItem.setText("Save As ...");
                     saveAsMenuItem.addActionListener(new ActionListener() {
+                        @Override
                         public void actionPerformed(ActionEvent evt) {
                             saveAsMenuItemActionPerformed(evt);
                         }
@@ -678,6 +687,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                     fileMenu.add(exitMenuItem);
                     exitMenuItem.setText("Exit");
                     exitMenuItem.addActionListener(new ActionListener() {
+                        @Override
                         public void actionPerformed(ActionEvent evt) {
                             System.exit(0);
                         }
@@ -694,6 +704,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                     buildMenuItem.setText("Build");
                     buildMenuItem.setAccelerator(KeyStroke.getKeyStroke("ctrl B"));
                     buildMenuItem.addActionListener(new ActionListener() {
+                        @Override
                         public void actionPerformed(ActionEvent evt) {
                             if (sceneMenu.isEnabled())
                                 buildMenuItemActionPerformed(evt);
@@ -715,6 +726,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                     sceneMenu.add(renderMenuItem);
                     renderMenuItem.setText("Render");
                     renderMenuItem.addActionListener(new ActionListener() {
+                        @Override
                         public void actionPerformed(ActionEvent evt) {
                             renderMenuItemActionPerformed(evt);
                         }
@@ -725,6 +737,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                     sceneMenu.add(iprMenuItem);
                     iprMenuItem.setText("IPR");
                     iprMenuItem.addActionListener(new ActionListener() {
+                        @Override
                         public void actionPerformed(ActionEvent evt) {
                             iprMenuItemActionPerformed(evt);
                         }
@@ -746,6 +759,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                     sceneMenu.add(textureCacheClearMenuItem);
                     textureCacheClearMenuItem.setText("Clear Texture Cache");
                     textureCacheClearMenuItem.addActionListener(new ActionListener() {
+                        @Override
                         public void actionPerformed(ActionEvent evt) {
                             textureCacheClearMenuItemActionPerformed(evt);
                         }
@@ -757,6 +771,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                     smallTrianglesMenuItem.setText("Low Mem Triangles");
                     smallTrianglesMenuItem.setToolTipText("Load future meshes using a low memory footprint triangle representation");
                     smallTrianglesMenuItem.addActionListener(new ActionListener() {
+                        @Override
                         public void actionPerformed(ActionEvent evt) {
                             smallTrianglesMenuItemActionPerformed(evt);
                         }
@@ -772,6 +787,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                     imageMenu.add(resetZoomMenuItem);
                     resetZoomMenuItem.setText("Reset Zoom");
                     resetZoomMenuItem.addActionListener(new ActionListener() {
+                        @Override
                         public void actionPerformed(ActionEvent evt) {
                             imagePanel.reset();
                         }
@@ -782,6 +798,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                     imageMenu.add(fitWindowMenuItem);
                     fitWindowMenuItem.setText("Fit to Window");
                     fitWindowMenuItem.addActionListener(new ActionListener() {
+                        @Override
                         public void actionPerformed(ActionEvent evt) {
                             imagePanel.fit();
                         }
@@ -796,6 +813,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                     imageMenu.add(jMenuItem4);
                     jMenuItem4.setText("Save Image ...");
                     jMenuItem4.addActionListener(new ActionListener() {
+                        @Override
                         public void actionPerformed(ActionEvent evt) {
                             // imagePanel.image;
                             JFileChooser fc = new JFileChooser(".");
@@ -829,6 +847,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                 imageWindowMenuItem.setText("Image");
                 imageWindowMenuItem.setAccelerator(KeyStroke.getKeyStroke("ctrl 1"));
                 imageWindowMenuItem.addActionListener(new ActionListener() {
+                    @Override
                     public void actionPerformed(ActionEvent evt) {
                         selectFrame(imagePanelFrame);
                     }
@@ -840,6 +859,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                 editorWindowMenuItem.setText("Script Editor");
                 editorWindowMenuItem.setAccelerator(KeyStroke.getKeyStroke("ctrl 2"));
                 editorWindowMenuItem.addActionListener(new ActionListener() {
+                    @Override
                     public void actionPerformed(ActionEvent evt) {
                         selectFrame(editorFrame);
                     }
@@ -851,6 +871,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                 consoleWindowMenuItem.setText("Console");
                 consoleWindowMenuItem.setAccelerator(KeyStroke.getKeyStroke("ctrl 3"));
                 consoleWindowMenuItem.addActionListener(new ActionListener() {
+                    @Override
                     public void actionPerformed(ActionEvent evt) {
                         selectFrame(consoleFrame);
                     }
@@ -866,6 +887,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                 tileWindowMenuItem.setText("Tile");
                 tileWindowMenuItem.setAccelerator(KeyStroke.getKeyStroke("ctrl T"));
                 tileWindowMenuItem.addActionListener(new ActionListener() {
+                    @Override
                     public void actionPerformed(ActionEvent evt) {
                         tileWindowMenuItemActionPerformed(evt);
                     }
@@ -950,6 +972,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
 
     private void println(final String s) {
         SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 consoleTextArea.append(s + "\n");
             }
@@ -968,18 +991,21 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
         iprButton.setEnabled(enabled);
     }
 
+    @Override
     public void print(Module m, PrintLevel level, String s) {
         if (level == PrintLevel.ERROR)
             JOptionPane.showMessageDialog(SunflowGUI.this, s, String.format("Error - %s", m.name()), JOptionPane.ERROR_MESSAGE);
         println(UI.formatOutput(m, level, s));
     }
 
+    @Override
     public void taskStart(String s, int min, int max) {
         currentTask = s;
         currentTaskLastP = -1;
         final int taskMin = min;
         final int taskMax = max;
         SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 taskProgressBar.setEnabled(true);
                 taskCancelButton.setEnabled(true);
@@ -991,10 +1017,12 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
         });
     }
 
+    @Override
     public void taskUpdate(int current) {
         final int taskCurrent = current;
         final String taskString = currentTask;
         SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 taskProgressBar.setValue(taskCurrent);
                 int p = (int) (100.0 * taskProgressBar.getPercentComplete());
@@ -1006,8 +1034,10 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
         });
     }
 
+    @Override
     public void taskStop() {
         SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 taskProgressBar.setValue(taskProgressBar.getMinimum());
                 taskProgressBar.setString("");

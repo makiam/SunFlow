@@ -61,6 +61,7 @@ public class TriangleMesh implements PrimitiveList {
         }
     }
 
+    @Override
     public boolean update(ParameterList pl, SunflowAPI api) {
         boolean updatedTopology = false;
         {
@@ -116,6 +117,7 @@ public class TriangleMesh implements PrimitiveList {
         return true;
     }
 
+    @Override
     public float getPrimitiveBound(int primID, int i) {
         int tri = 3 * primID;
         int a = 3 * triangles[tri + 0];
@@ -128,6 +130,7 @@ public class TriangleMesh implements PrimitiveList {
             return MathUtils.max(points[a + axis], points[b + axis], points[c + axis]);
     }
 
+    @Override
     public BoundingBox getWorldBounds(Matrix4 o2w) {
         BoundingBox bounds = new BoundingBox();
         if (o2w == null) {
@@ -188,6 +191,7 @@ public class TriangleMesh implements PrimitiveList {
         state.setIntersection(primID, beta, gamma);
     }
 
+    @Override
     public void intersectPrimitive(Ray r, int primID, IntersectionState state) {
         // alternative test -- disabled for now
         // intersectPrimitiveRobust(r, primID, state);
@@ -200,10 +204,12 @@ public class TriangleMesh implements PrimitiveList {
         intersectTriangleKensler(r, primID, state);
     }
 
+    @Override
     public int getNumPrimitives() {
         return triangles.length / 3;
     }
 
+    @Override
     public void prepareShadingState(ShadingState state) {
         state.init();
         Instance parent = state.getInstance();
@@ -478,6 +484,7 @@ public class TriangleMesh implements PrimitiveList {
         }
     }
 
+    @Override
     public PrimitiveList getBakingPrimitives() {
         switch (uvs.interp) {
             case NONE:
@@ -490,14 +497,17 @@ public class TriangleMesh implements PrimitiveList {
     }
 
     private class BakingSurface implements PrimitiveList {
+        @Override
         public PrimitiveList getBakingPrimitives() {
             return null;
         }
 
+        @Override
         public int getNumPrimitives() {
             return TriangleMesh.this.getNumPrimitives();
         }
 
+        @Override
         public float getPrimitiveBound(int primID, int i) {
             if (i > 3)
                 return 0;
@@ -548,6 +558,7 @@ public class TriangleMesh implements PrimitiveList {
             }
         }
 
+        @Override
         public BoundingBox getWorldBounds(Matrix4 o2w) {
             BoundingBox bounds = new BoundingBox();
             if (o2w == null) {
@@ -567,6 +578,7 @@ public class TriangleMesh implements PrimitiveList {
             return bounds;
         }
 
+        @Override
         public void intersectPrimitive(Ray r, int primID, IntersectionState state) {
             float uv00 = 0, uv01 = 0, uv10 = 0, uv11 = 0, uv20 = 0, uv21 = 0;
             switch (uvs.interp) {
@@ -651,6 +663,7 @@ public class TriangleMesh implements PrimitiveList {
             }
         }
 
+        @Override
         public void prepareShadingState(ShadingState state) {
             state.init();
             Instance parent = state.getInstance();
@@ -777,6 +790,7 @@ public class TriangleMesh implements PrimitiveList {
             state.setShader(parent.getShader(shaderIndex));
         }
 
+        @Override
         public boolean update(ParameterList pl, SunflowAPI api) {
             return true;
         }

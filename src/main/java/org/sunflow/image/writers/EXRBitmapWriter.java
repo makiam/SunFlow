@@ -44,6 +44,7 @@ public class EXRBitmapWriter implements BitmapWriter {
         configure("channeltype", "half");
     }
 
+    @Override
     public void configure(String option, String value) {
         if (option.equals("compression")) {
             if (value.equals("none"))
@@ -71,10 +72,12 @@ public class EXRBitmapWriter implements BitmapWriter {
         }
     }
 
+    @Override
     public void openFile(String filename) throws IOException {
         this.filename = filename == null ? "output.exr" : filename;
     }
 
+    @Override
     public void writeHeader(int width, int height, int tileSize) throws IOException, UnsupportedOperationException {
         file = new RandomAccessFile(filename, "rw");
         file.setLength(0);
@@ -83,12 +86,14 @@ public class EXRBitmapWriter implements BitmapWriter {
         writeRGBAHeader(width, height, tileSize);
     }
 
+    @Override
     public void writeTile(int x, int y, int w, int h, Color[] color, float[] alpha) throws IOException {
         int tx = x / tileSize;
         int ty = y / tileSize;
         writeEXRTile(tx, ty, w, h, color, alpha);
     }
 
+    @Override
     public void closeFile() throws IOException {
         writeTileOffsets();
         file.close();

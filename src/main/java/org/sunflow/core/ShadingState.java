@@ -901,6 +901,7 @@ public final class ShadingState implements Iterable<LightSample> {
     /**
      * Allows iteration over current light samples.
      */
+    @Override
     public Iterator<LightSample> iterator() {
         return new LightSampleIterator(lightSample);
     }
@@ -912,16 +913,19 @@ public final class ShadingState implements Iterable<LightSample> {
             current = head;
         }
 
+        @Override
         public boolean hasNext() {
             return current != null;
         }
 
+        @Override
         public LightSample next() {
             LightSample c = current;
             current = current.next;
             return c;
         }
 
+        @Override
         public void remove() {
             throw new UnsupportedOperationException();
         }

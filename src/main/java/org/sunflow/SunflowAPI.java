@@ -80,6 +80,7 @@ public class SunflowAPI implements SunflowAPIInterface {
         reset();
     }
 
+    @Override
     public final void reset() {
         scene = new Scene();
         includeSearchPath = new SearchPath("include");
@@ -89,6 +90,7 @@ public class SunflowAPI implements SunflowAPIInterface {
         currentFrame = 1;
     }
 
+    @Override
     public final void plugin(String type, String name, String code) {
         if (type.equals("primitive"))
             PluginRegistry.primitivePlugins.registerPlugin(name, code);
@@ -126,22 +128,27 @@ public class SunflowAPI implements SunflowAPIInterface {
             UI.printWarning(Module.API, "Unrecognized plugin type: \"%s\" - ignoring declaration of \"%s\"", type, name);
     }
 
+    @Override
     public final void parameter(String name, String value) {
         parameterList.addString(name, value);
     }
 
+    @Override
     public final void parameter(String name, boolean value) {
         parameterList.addBoolean(name, value);
     }
 
+    @Override
     public final void parameter(String name, int value) {
         parameterList.addInteger(name, value);
     }
 
+    @Override
     public final void parameter(String name, float value) {
         parameterList.addFloat(name, value);
     }
 
+    @Override
     public final void parameter(String name, String colorspace, float... data) {
         try {
             parameterList.addColor(name, ColorFactory.createColor(colorspace, data));
@@ -150,33 +157,40 @@ public class SunflowAPI implements SunflowAPIInterface {
         }
     }
 
+    @Override
     public final void parameter(String name, Point3 value) {
         parameterList.addPoints(name, InterpolationType.NONE, new float[] {
                 value.x, value.y, value.z });
     }
 
+    @Override
     public final void parameter(String name, Vector3 value) {
         parameterList.addVectors(name, InterpolationType.NONE, new float[] {
                 value.x, value.y, value.z });
     }
 
+    @Override
     public final void parameter(String name, Point2 value) {
         parameterList.addTexCoords(name, InterpolationType.NONE, new float[] {
                 value.x, value.y });
     }
 
+    @Override
     public final void parameter(String name, Matrix4 value) {
         parameterList.addMatrices(name, InterpolationType.NONE, value.asRowMajor());
     }
 
+    @Override
     public final void parameter(String name, int[] value) {
         parameterList.addIntegerArray(name, value);
     }
 
+    @Override
     public final void parameter(String name, String[] value) {
         parameterList.addStringArray(name, value);
     }
 
+    @Override
     public final void parameter(String name, String type, String interpolation, float[] data) {
         InterpolationType interp;
         try {
@@ -199,6 +213,7 @@ public class SunflowAPI implements SunflowAPIInterface {
             UI.printError(Module.API, "Unknown parameter type: %s -- ignoring parameter \"%s\"", type, name);
     }
 
+    @Override
     public void remove(String name) {
         renderObjects.remove(name);
     }
@@ -218,6 +233,7 @@ public class SunflowAPI implements SunflowAPIInterface {
         return success;
     }
 
+    @Override
     public final void searchpath(String type, String path) {
         if (type.equals("include"))
             includeSearchPath.addSearchPath(path);
@@ -251,6 +267,7 @@ public class SunflowAPI implements SunflowAPIInterface {
         return includeSearchPath.resolvePath(filename);
     }
 
+    @Override
     public final void shader(String name, String shaderType) {
         if (!isIncremental(shaderType)) {
             // we are declaring a shader for the first time
@@ -275,6 +292,7 @@ public class SunflowAPI implements SunflowAPIInterface {
         }
     }
 
+    @Override
     public final void modifier(String name, String modifierType) {
         if (!isIncremental(modifierType)) {
             // we are declaring a shader for the first time
@@ -299,6 +317,7 @@ public class SunflowAPI implements SunflowAPIInterface {
         }
     }
 
+    @Override
     public final void geometry(String name, String typeName) {
         if (!isIncremental(typeName)) {
             // we are declaring a geometry for the first time
@@ -332,6 +351,7 @@ public class SunflowAPI implements SunflowAPIInterface {
         }
     }
 
+    @Override
     public final void instance(String name, String geoname) {
         if (!isIncremental(geoname)) {
             // we are declaring this instance for the first time
@@ -351,6 +371,7 @@ public class SunflowAPI implements SunflowAPIInterface {
         }
     }
 
+    @Override
     public final void light(String name, String lightType) {
         if (!isIncremental(lightType)) {
             // we are declaring this light for the first time
@@ -374,6 +395,7 @@ public class SunflowAPI implements SunflowAPIInterface {
         }
     }
 
+    @Override
     public final void camera(String name, String lensType) {
         if (!isIncremental(lensType)) {
             // we are declaring this camera for the first time
@@ -398,6 +420,7 @@ public class SunflowAPI implements SunflowAPIInterface {
         }
     }
 
+    @Override
     public final void options(String name) {
         if (lookupOptions(name) == null) {
             if (renderObjects.has(name)) {
@@ -485,6 +508,7 @@ public class SunflowAPI implements SunflowAPIInterface {
         return renderObjects.lookupLight(name);
     }
 
+    @Override
     public final void render(String optionsName, Display display) {
         renderObjects.updateScene(scene);
         Options opt = lookupOptions(optionsName);
@@ -521,6 +545,7 @@ public class SunflowAPI implements SunflowAPIInterface {
         scene.render(opt, sampler, display);
     }
 
+    @Override
     public final boolean include(String filename) {
         if (filename == null)
             return false;
@@ -677,6 +702,7 @@ public class SunflowAPI implements SunflowAPIInterface {
         return currentFrame;
     }
 
+    @Override
     public void currentFrame(int currentFrame) {
         this.currentFrame = currentFrame;
     }

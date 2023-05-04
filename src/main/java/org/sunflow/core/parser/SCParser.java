@@ -57,6 +57,7 @@ public class SCParser implements SceneParser {
         return String.format("@sc_%d::%s_%d", instanceNumber, prefix, index);
     }
 
+    @Override
     public boolean parse(String filename, SunflowAPIInterface api) {
         String localDir = new File(filename).getAbsoluteFile().getParentFile().getAbsolutePath();
         numLightSamples = 1;

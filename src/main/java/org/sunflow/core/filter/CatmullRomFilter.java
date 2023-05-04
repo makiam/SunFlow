@@ -3,10 +3,12 @@ package org.sunflow.core.filter;
 import org.sunflow.core.Filter;
 
 public class CatmullRomFilter implements Filter {
+    @Override
     public float getSize() {
         return 4.0f;
     }
 
+    @Override
     public float get(float x, float y) {
         return catrom1d(x) * catrom1d(y);
     }

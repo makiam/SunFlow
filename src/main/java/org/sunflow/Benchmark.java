@@ -207,16 +207,19 @@ public class Benchmark implements BenchmarkTest, UserInterface, Display {
         }
     }
 
+    @Override
     public void kernelBegin() {
         // allocate a fresh validation target
         validationImage = new int[resolution * resolution];
     }
 
+    @Override
     public void kernelMain() {
         // this builds and renders the scene
         new BenchmarkScene();
     }
 
+    @Override
     public void kernelEnd() {
         // make sure the rendered image was correct
         int diff = 0;
@@ -236,6 +239,7 @@ public class Benchmark implements BenchmarkTest, UserInterface, Display {
 
     }
 
+    @Override
     public void print(Module m, PrintLevel level, String s) {
         if (showOutput || (showBenchmarkOutput && m == Module.BENCH))
             System.out.println(UI.formatOutput(m, level, s));
@@ -243,34 +247,42 @@ public class Benchmark implements BenchmarkTest, UserInterface, Display {
             throw new RuntimeException(s);
     }
 
+    @Override
     public void taskStart(String s, int min, int max) {
         // render progress display not needed
     }
 
+    @Override
     public void taskStop() {
         // render progress display not needed
     }
 
+    @Override
     public void taskUpdate(int current) {
         // render progress display not needed
     }
 
+    @Override
     public void imageBegin(int w, int h, int bucketSize) {
         // we can assume w == h == resolution
     }
 
+    @Override
     public void imageEnd() {
         // nothing needs to be done - image verification is done externally
     }
 
+    @Override
     public void imageFill(int x, int y, int w, int h, Color c, float alpha) {
         // this is not used
     }
 
+    @Override
     public void imagePrepare(int x, int y, int w, int h, int id) {
         // this is not needed
     }
 
+    @Override
     public void imageUpdate(int x, int y, int w, int h, Color[] data, float[] alpha) {
         // copy bucket data to validation image
         for (int j = 0, index = 0; j < h; j++, y++)

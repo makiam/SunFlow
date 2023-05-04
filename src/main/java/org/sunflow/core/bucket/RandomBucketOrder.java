@@ -3,6 +3,7 @@ package org.sunflow.core.bucket;
 import org.sunflow.core.BucketOrder;
 
 public class RandomBucketOrder implements BucketOrder {
+    @Override
     public int[] getBucketSequence(int nbw, int nbh) {
         int[] coords = new int[2 * nbw * nbh];
         for (int i = 0; i < nbw * nbh; i++) {

@@ -137,6 +137,7 @@ class LightServer {
             final int start = threadID * delta;
             final int end = (threadID == (photonThreads.length - 1)) ? numEmittedPhotons : (threadID + 1) * delta;
             photonThreads[i] = new Thread(new Runnable() {
+                @Override
                 public void run() {
                     IntersectionState istate = new IntersectionState();
                     for (int i = start; i < end; i++) {

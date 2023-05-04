@@ -24,6 +24,7 @@ public class FileDisplay implements Display {
         writer = PluginRegistry.bitmapWriterPlugins.createObject(extension);
     }
 
+    @Override
     public void imageBegin(int w, int h, int bucketSize) {
         if (writer == null)
             return;
@@ -35,10 +36,12 @@ public class FileDisplay implements Display {
         }
     }
 
+    @Override
     public void imagePrepare(int x, int y, int w, int h, int id) {
         // does nothing for files
     }
 
+    @Override
     public void imageUpdate(int x, int y, int w, int h, Color[] data, float[] alpha) {
         if (writer == null)
             return;
@@ -49,6 +52,7 @@ public class FileDisplay implements Display {
         }
     }
 
+    @Override
     public void imageFill(int x, int y, int w, int h, Color c, float alpha) {
         if (writer == null)
             return;
@@ -61,6 +65,7 @@ public class FileDisplay implements Display {
         imageUpdate(x, y, w, h, colorTile, alphaTile);
     }
 
+    @Override
     public void imageEnd() {
         if (writer == null)
             return;

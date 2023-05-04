@@ -9,15 +9,19 @@ import org.sunflow.system.UI.PrintLevel;
  * output.
  */
 public class SilentInterface implements UserInterface {
+    @Override
     public void print(Module m, PrintLevel level, String s) {
     }
 
+    @Override
     public void taskStart(String s, int min, int max) {
     }
 
+    @Override
     public void taskUpdate(int current) {
     }
 
+    @Override
     public void taskStop() {
     }
 }

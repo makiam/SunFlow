@@ -50,6 +50,7 @@ public class Geometry implements RenderObject {
         builtTess = 1; // already tesselated
     }
 
+    @Override
     public boolean update(ParameterList pl, SunflowAPI api) {
         acceltype = pl.getString("accel", acceltype);
         // clear up old tesselation if it exists

@@ -15,6 +15,7 @@ import org.sunflow.image.formats.BitmapRGBA8;
 public class TGABitmapReader implements BitmapReader {
     private static final int[] CHANNEL_INDEX = { 2, 1, 0, 3 };
 
+    @Override
     public Bitmap load(String filename, boolean isLinear) throws IOException, BitmapFormatException {
         InputStream f = new BufferedInputStream(new FileInputStream(filename));
         byte[] read = new byte[4];

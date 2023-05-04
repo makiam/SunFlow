@@ -27,6 +27,7 @@ public class IrradianceCacheGIEngine implements GIEngine {
     private ReentrantReadWriteLock rwl;
     private GlobalPhotonMapInterface globalPhotonMap;
 
+    @Override
     public boolean init(Options options, Scene scene) {
         // get settings
         samples = options.getInt("gi.irr-cache.samples", 256);
@@ -56,6 +57,7 @@ public class IrradianceCacheGIEngine implements GIEngine {
         return (globalPhotonMap != null) ? scene.calculatePhotons(globalPhotonMap, "global", 0, options) : true;
     }
 
+    @Override
     public Color getGlobalRadiance(ShadingState state) {
         if (globalPhotonMap == null) {
             if (state.getShader() != null)
@@ -66,6 +68,7 @@ public class IrradianceCacheGIEngine implements GIEngine {
             return globalPhotonMap.getRadiance(state.getPoint(), state.getNormal());
     }
 
+    @Override
     public Color getIrradiance(ShadingState state, Color diffuseReflectance) {
         if (samples <= 0)
             return Color.BLACK;

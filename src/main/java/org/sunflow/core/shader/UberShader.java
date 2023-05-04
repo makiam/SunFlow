@@ -30,6 +30,7 @@ public class UberShader implements Shader {
         numSamples = 4;
     }
 
+    @Override
     public boolean update(ParameterList pl, SunflowAPI api) {
         diff = pl.getColor("diffuse", diff);
         spec = pl.getColor("specular", spec);
@@ -55,6 +56,7 @@ public class UberShader implements Shader {
         return specmap == null ? spec : Color.blend(spec, specmap.getPixel(state.getUV().x, state.getUV().y), specBlend);
     }
 
+    @Override
     public Color getRadiance(ShadingState state) {
         // make sure we are on the right side of the material
         state.faceforward();
@@ -87,6 +89,7 @@ public class UberShader implements Shader {
             return lr.add(state.specularPhong(getSpecular(state), 2 / glossyness, numSamples));
     }
 
+    @Override
     public void scatterPhoton(ShadingState state, Color power) {
         Color diffuse, specular;
         // make sure we are on the right side of the material

@@ -20,6 +20,7 @@ public abstract class SCAbstractParser implements SceneParser {
         RESET, PARAMETER, GEOMETRY, INSTANCE, SHADER, MODIFIER, LIGHT, CAMERA, OPTIONS, INCLUDE, REMOVE, FRAME, PLUGIN, SEARCHPATH, STRING, BOOL, INT, FLOAT, COLOR, POINT, VECTOR, TEXCOORD, MATRIX, STRING_ARRAY, INT_ARRAY, FLOAT_ARRAY, POINT_ARRAY, VECTOR_ARRAY, TEXCOORD_ARRAY, MATRIX_ARRAY, END_OF_FILE,
     }
 
+    @Override
     public boolean parse(String filename, SunflowAPIInterface api) {
         Timer timer = new Timer();
         timer.start();

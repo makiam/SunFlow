@@ -26,6 +26,7 @@ final class InstanceList implements PrimitiveList {
         lights = new Instance[0];
     }
 
+    @Override
     public final float getPrimitiveBound(int primID, int i) {
         if (primID < instances.length)
             return instances[primID].getBounds().getBound(i);
@@ -33,6 +34,7 @@ final class InstanceList implements PrimitiveList {
             return lights[primID - instances.length].getBounds().getBound(i);
     }
 
+    @Override
     public final BoundingBox getWorldBounds(Matrix4 o2w) {
         BoundingBox bounds = new BoundingBox();
         for (Instance i : instances)
@@ -42,6 +44,7 @@ final class InstanceList implements PrimitiveList {
         return bounds;
     }
 
+    @Override
     public final void intersectPrimitive(Ray r, int primID, IntersectionState state) {
         if (primID < instances.length)
             instances[primID].intersect(r, state);
@@ -49,6 +52,7 @@ final class InstanceList implements PrimitiveList {
             lights[primID - instances.length].intersect(r, state);
     }
 
+    @Override
     public final int getNumPrimitives() {
         return instances.length + lights.length;
     }
@@ -57,14 +61,17 @@ final class InstanceList implements PrimitiveList {
         return primID < instances.length ? instances[primID].getNumPrimitives() : lights[primID - instances.length].getNumPrimitives();
     }
 
+    @Override
     public final void prepareShadingState(ShadingState state) {
         state.getInstance().prepareShadingState(state);
     }
 
+    @Override
     public boolean update(ParameterList pl, SunflowAPI api) {
         return true;
     }
 
+    @Override
     public PrimitiveList getBakingPrimitives() {
         return null;
     }

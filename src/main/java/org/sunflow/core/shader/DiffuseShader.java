@@ -16,6 +16,7 @@ public class DiffuseShader implements Shader {
         diff = Color.WHITE;
     }
 
+    @Override
     public boolean update(ParameterList pl, SunflowAPI api) {
         diff = pl.getColor("diffuse", diff);
         return true;
@@ -25,6 +26,7 @@ public class DiffuseShader implements Shader {
         return diff;
     }
 
+    @Override
     public Color getRadiance(ShadingState state) {
         // make sure we are on the right side of the material
         state.faceforward();
@@ -34,6 +36,7 @@ public class DiffuseShader implements Shader {
         return state.diffuse(getDiffuse(state));
     }
 
+    @Override
     public void scatterPhoton(ShadingState state, Color power) {
         Color diffuse;
         // make sure we are on the right side of the material

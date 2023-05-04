@@ -18,19 +18,23 @@ public class IGIBitmapWriter implements BitmapWriter {
     private int width, height;
     private float[] xyz;
 
+    @Override
     public void configure(String option, String value) {
     }
 
+    @Override
     public void openFile(String filename) throws IOException {
         this.filename = filename;
     }
 
+    @Override
     public void writeHeader(int width, int height, int tileSize) throws IOException, UnsupportedOperationException {
         this.width = width;
         this.height = height;
         xyz = new float[width * height * 3];
     }
 
+    @Override
     public void writeTile(int x, int y, int w, int h, Color[] color, float[] alpha) throws IOException {
         for (int j = 0, index = 0, pixel = 3 * (x + y * width); j < h; j++, pixel += 3 * (width - w)) {
             for (int i = 0; i < w; i++, index++, pixel += 3) {
@@ -42,6 +46,7 @@ public class IGIBitmapWriter implements BitmapWriter {
         }
     }
 
+    @Override
     public void closeFile() throws IOException {
         OutputStream stream = new BufferedOutputStream(new FileOutputStream(filename));
         write32(stream, 66613373); // magic number

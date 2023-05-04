@@ -9,10 +9,12 @@ public class GaussianFilter implements Filter {
         es2 = (float) -Math.exp(-getSize() * getSize());
     }
 
+    @Override
     public float getSize() {
         return 3.0f;
     }
 
+    @Override
     public float get(float x, float y) {
         float gx = (float) Math.exp(-x * x) + es2;
         float gy = (float) Math.exp(-y * y) + es2;

@@ -41,6 +41,7 @@ public class MultipassRenderer implements ImageSampler {
         shadingCache = false;
     }
 
+    @Override
     public boolean prepare(Options options, Scene scene, int w, int h) {
         this.scene = scene;
         imageWidth = w;
@@ -71,6 +72,7 @@ public class MultipassRenderer implements ImageSampler {
         return true;
     }
 
+    @Override
     public void render(Display display) {
         this.display = display;
         display.imageBegin(imageWidth, imageHeight, bucketSize);

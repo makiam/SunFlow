@@ -8,10 +8,12 @@ import org.sunflow.core.ShadingState;
 import org.sunflow.image.Color;
 
 public class ViewCausticsShader implements Shader {
+    @Override
     public boolean update(ParameterList pl, SunflowAPI api) {
         return true;
     }
 
+    @Override
     public Color getRadiance(ShadingState state) {
         state.faceforward();
         state.initCausticSamples();
@@ -23,6 +25,7 @@ public class ViewCausticsShader implements Shader {
 
     }
 
+    @Override
     public void scatterPhoton(ShadingState state, Color power) {
     }
 }

@@ -22,6 +22,7 @@ public class GlassShader implements Shader {
         absorptionColor = Color.GRAY; // 50% absorbtion
     }
 
+    @Override
     public boolean update(ParameterList pl, SunflowAPI api) {
         color = pl.getColor("color", color);
         eta = pl.getFloat("eta", eta);
@@ -32,6 +33,7 @@ public class GlassShader implements Shader {
         return true;
     }
 
+    @Override
     public Color getRadiance(ShadingState state) {
         if (!state.includeSpecular())
             return Color.BLACK;
@@ -86,6 +88,7 @@ public class GlassShader implements Shader {
         return absorbtion != null ? ret.mul(absorbtion) : ret;
     }
 
+    @Override
     public void scatterPhoton(ShadingState state, Color power) {
         Color refr = Color.mul(1 - f0, color);
         Color refl = Color.mul(f0, color);

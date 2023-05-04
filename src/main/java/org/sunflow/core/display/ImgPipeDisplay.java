@@ -18,15 +18,18 @@ public class ImgPipeDisplay extends JPanel implements Display {
     public ImgPipeDisplay() {
     }
 
+    @Override
     public synchronized void imageBegin(int w, int h, int bucketSize) {
         ih = h;
         outputPacket(5, w, h, Float.floatToRawIntBits(1.0f), 0);
         System.out.flush();
     }
 
+    @Override
     public synchronized void imagePrepare(int x, int y, int w, int h, int id) {
     }
 
+    @Override
     public synchronized void imageUpdate(int x, int y, int w, int h, Color[] data, float[] alpha) {
         int xl = x;
         int xh = x + w - 1;
@@ -53,6 +56,7 @@ public class ImgPipeDisplay extends JPanel implements Display {
         }
     }
 
+    @Override
     public synchronized void imageFill(int x, int y, int w, int h, Color c, float alpha) {
         int xl = x;
         int xh = x + w - 1;
@@ -79,6 +83,7 @@ public class ImgPipeDisplay extends JPanel implements Display {
         }
     }
 
+    @Override
     public synchronized void imageEnd() {
         outputPacket(4, 0, 0, 0, 0);
         System.out.flush();

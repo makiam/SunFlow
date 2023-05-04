@@ -22,6 +22,7 @@ public class BoundingIntervalHierarchy implements AccelerationStructure {
         maxPrims = 2;
     }
 
+    @Override
     public void build(PrimitiveList primitives) {
         this.primitives = primitives;
         int n = primitives.getNumPrimitives();
@@ -370,6 +371,7 @@ public class BoundingIntervalHierarchy implements AccelerationStructure {
             stats.updateLeaf(depth + 1, 0);
     }
 
+    @Override
     public void intersect(Ray r, IntersectionState state) {
         float intervalMin = r.getMin();
         float intervalMax = r.getMax();

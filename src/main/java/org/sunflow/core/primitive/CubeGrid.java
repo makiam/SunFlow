@@ -23,6 +23,7 @@ public abstract class CubeGrid implements PrimitiveList {
         bounds = new BoundingBox(1);
     }
 
+    @Override
     public boolean update(ParameterList pl, SunflowAPI api) {
         nx = pl.getInt("resolutionX", nx);
         ny = pl.getInt("resolutionY", ny);
@@ -42,6 +43,7 @@ public abstract class CubeGrid implements PrimitiveList {
         return bounds;
     }
 
+    @Override
     public void prepareShadingState(ShadingState state) {
         state.init();
         state.getRay().getPoint(state.getPoint());
@@ -77,6 +79,7 @@ public abstract class CubeGrid implements PrimitiveList {
         state.setModifier(parent.getModifier(0));
     }
 
+    @Override
     public void intersectPrimitive(Ray r, int primID, IntersectionState state) {
         float intervalMin = r.getMin();
         float intervalMax = r.getMax();
@@ -272,14 +275,17 @@ public abstract class CubeGrid implements PrimitiveList {
         }
     }
 
+    @Override
     public int getNumPrimitives() {
         return 1;
     }
 
+    @Override
     public float getPrimitiveBound(int primID, int i) {
         return ((i & 1) == 0) ? -1 : 1;
     }
 
+    @Override
     public BoundingBox getWorldBounds(Matrix4 o2w) {
         if (o2w == null)
             return bounds;

@@ -51,6 +51,7 @@ public class QuadMesh implements PrimitiveList {
         }
     }
 
+    @Override
     public boolean update(ParameterList pl, SunflowAPI api) {
         {
             int[] quads = pl.getIntArray("quads");
@@ -99,6 +100,7 @@ public class QuadMesh implements PrimitiveList {
         return true;
     }
 
+    @Override
     public float getPrimitiveBound(int primID, int i) {
         int quad = 4 * primID;
         int a = 3 * quads[quad + 0];
@@ -112,6 +114,7 @@ public class QuadMesh implements PrimitiveList {
             return MathUtils.max(points[a + axis], points[b + axis], points[c + axis], points[d + axis]);
     }
 
+    @Override
     public BoundingBox getWorldBounds(Matrix4 o2w) {
         BoundingBox bounds = new BoundingBox();
         if (o2w == null) {
@@ -132,6 +135,7 @@ public class QuadMesh implements PrimitiveList {
         return bounds;
     }
 
+    @Override
     public void intersectPrimitive(Ray r, int primID, IntersectionState state) {
         // ray/bilinear patch intersection adapted from "Production Rendering:
         // Design and Implementation" by Ian Stephenson (Ed.)
@@ -237,10 +241,12 @@ public class QuadMesh implements PrimitiveList {
         }
     }
 
+    @Override
     public int getNumPrimitives() {
         return quads.length / 4;
     }
 
+    @Override
     public void prepareShadingState(ShadingState state) {
         state.init();
         Instance parent = state.getInstance();
@@ -386,6 +392,7 @@ public class QuadMesh implements PrimitiveList {
         return new Point3(points[i], points[i + 1], points[i + 2]);
     }
 
+    @Override
     public PrimitiveList getBakingPrimitives() {
         return null;
     }

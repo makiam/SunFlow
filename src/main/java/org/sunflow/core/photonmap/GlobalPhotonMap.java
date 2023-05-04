@@ -34,6 +34,7 @@ public final class GlobalPhotonMap implements GlobalPhotonMapInterface {
         maxRadius = 0;
     }
 
+    @Override
     public void prepare(Options options, BoundingBox sceneBounds) {
         // get settings
         numEmit = options.getInt("gi.irr-cache.gmap.emit", 100000);
@@ -46,6 +47,7 @@ public final class GlobalPhotonMap implements GlobalPhotonMapInterface {
         storedPhotons = halfStoredPhotons = 0;
     }
 
+    @Override
     public void store(ShadingState state, Vector3 dir, Color power, Color diffuse) {
         Photon p = new Photon(state.getPoint(), state.getNormal(), dir, power, diffuse);
         synchronized (this) {
@@ -253,6 +255,7 @@ public final class GlobalPhotonMap implements GlobalPhotonMapInterface {
         }
     }
 
+    @Override
     public void init() {
         UI.printInfo(Module.LIGHT, "Balancing global photon map ...");
         UI.taskStart("Balancing global photon map", 0, 1);
@@ -342,6 +345,7 @@ public final class GlobalPhotonMap implements GlobalPhotonMapInterface {
         hasRadiance = true;
     }
 
+    @Override
     public Color getRadiance(Point3 p, Vector3 n) {
         if (!hasRadiance || (storedPhotons == 0))
             return Color.BLACK;
@@ -480,18 +484,22 @@ public final class GlobalPhotonMap implements GlobalPhotonMapInterface {
         }
     }
 
+    @Override
     public boolean allowDiffuseBounced() {
         return true;
     }
 
+    @Override
     public boolean allowReflectionBounced() {
         return true;
     }
 
+    @Override
     public boolean allowRefractionBounced() {
         return true;
     }
 
+    @Override
     public int numEmit() {
         return numEmit;
     }

@@ -28,6 +28,7 @@ public final class UniformGrid implements AccelerationStructure {
         invVoxelwx = invVoxelwy = invVoxelwz = 0;
     }
 
+    @Override
     public void build(PrimitiveList primitives) {
         Timer t = new Timer();
         t.start();
@@ -99,6 +100,7 @@ public final class UniformGrid implements AccelerationStructure {
         UI.printDetailed(Module.ACCEL, "  * Build time:          %s", t.toString());
     }
 
+    @Override
     public void intersect(Ray r, IntersectionState state) {
         float intervalMin = r.getMin();
         float intervalMax = r.getMax();

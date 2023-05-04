@@ -20,16 +20,19 @@ public class PointLight implements LightSource {
         power = Color.WHITE;
     }
 
+    @Override
     public boolean update(ParameterList pl, SunflowAPI api) {
         lightPoint = pl.getPoint("center", lightPoint);
         power = pl.getColor("power", power);
         return true;
     }
 
+    @Override
     public int getNumSamples() {
         return 1;
     }
 
+    @Override
     public void getSamples(ShadingState state) {
         Vector3 d = Point3.sub(lightPoint, state.getPoint(), new Vector3());
         if (Vector3.dot(d, state.getNormal()) > 0 && Vector3.dot(d, state.getGeoNormal()) > 0) {
@@ -45,6 +48,7 @@ public class PointLight implements LightSource {
         }
     }
 
+    @Override
     public void getPhoton(double randX1, double randY1, double randX2, double randY2, Point3 p, Vector3 dir, Color power) {
         p.set(lightPoint);
         float phi = (float) (2 * Math.PI * randX1);
@@ -55,10 +59,12 @@ public class PointLight implements LightSource {
         power.set(this.power);
     }
 
+    @Override
     public float getPower() {
         return power.getLuminance();
     }
 
+    @Override
     public Instance createInstance() {
         return null;
     }

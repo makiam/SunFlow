@@ -14,19 +14,23 @@ public class HDRBitmapWriter implements BitmapWriter {
     private int width, height;
     private int[] data;
 
+    @Override
     public void configure(String option, String value) {
     }
 
+    @Override
     public void openFile(String filename) throws IOException {
         this.filename = filename;
     }
 
+    @Override
     public void writeHeader(int width, int height, int tileSize) throws IOException, UnsupportedOperationException {
         this.width = width;
         this.height = height;
         data = new int[width * height];
     }
 
+    @Override
     public void writeTile(int x, int y, int w, int h, Color[] color, float[] alpha) throws IOException {
         int[] tileData = ColorEncoder.encodeRGBE(color);
         for (int j = 0, index = 0, pixel = x + y * width; j < h; j++, pixel += width - w)
@@ -34,6 +38,7 @@ public class HDRBitmapWriter implements BitmapWriter {
                 data[pixel] = tileData[index];
     }
 
+    @Override
     public void closeFile() throws IOException {
         OutputStream f = new BufferedOutputStream(new FileOutputStream(filename));
         f.write("#?RGBE\n".getBytes());

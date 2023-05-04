@@ -25,6 +25,7 @@ public class AnisotropicWardShader implements Shader {
         numRays = 4;
     }
 
+    @Override
     public boolean update(ParameterList pl, SunflowAPI api) {
         rhoD = pl.getColor("diffuse", rhoD);
         rhoS = pl.getColor("specular", rhoS);
@@ -57,6 +58,7 @@ public class AnisotropicWardShader implements Shader {
         return fr;
     }
 
+    @Override
     public Color getRadiance(ShadingState state) {
         // make sure we are on the right side of the material
         state.faceforward();
@@ -137,6 +139,7 @@ public class AnisotropicWardShader implements Shader {
         return lr;
     }
 
+    @Override
     public void scatterPhoton(ShadingState state, Color power) {
         // make sure we are on the right side of the material
         state.faceforward();

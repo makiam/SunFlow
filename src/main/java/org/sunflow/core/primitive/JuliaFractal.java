@@ -39,14 +39,17 @@ public class JuliaFractal implements PrimitiveList {
         epsilon = 0.00001f;
     }
 
+    @Override
     public int getNumPrimitives() {
         return 1;
     }
 
+    @Override
     public float getPrimitiveBound(int primID, int i) {
         return ((i & 1) == 0) ? -BOUNDING_RADIUS : BOUNDING_RADIUS;
     }
 
+    @Override
     public BoundingBox getWorldBounds(Matrix4 o2w) {
         BoundingBox bounds = new BoundingBox(BOUNDING_RADIUS);
         if (o2w != null)
@@ -54,6 +57,7 @@ public class JuliaFractal implements PrimitiveList {
         return bounds;
     }
 
+    @Override
     public void intersectPrimitive(Ray r, int primID, IntersectionState state) {
         // intersect with bounding sphere
         float qc = ((r.ox * r.ox) + (r.oy * r.oy) + (r.oz * r.oz)) - BOUNDING_RADIUS2;
@@ -133,6 +137,7 @@ public class JuliaFractal implements PrimitiveList {
         }
     }
 
+    @Override
     public void prepareShadingState(ShadingState state) {
         state.init();
         state.getRay().getPoint(state.getPoint());
@@ -237,6 +242,7 @@ public class JuliaFractal implements PrimitiveList {
         return (float) Math.sqrt(w * w + x * x + y * y + z * z);
     }
 
+    @Override
     public boolean update(ParameterList pl, SunflowAPI api) {
         maxIterations = pl.getInt("iterations", maxIterations);
         epsilon = pl.getFloat("epsilon", epsilon);
@@ -247,6 +253,7 @@ public class JuliaFractal implements PrimitiveList {
         return true;
     }
 
+    @Override
     public PrimitiveList getBakingPrimitives() {
         return null;
     }

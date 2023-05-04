@@ -3,6 +3,7 @@ package org.sunflow.core.bucket;
 import org.sunflow.core.BucketOrder;
 
 public class DiagonalBucketOrder implements BucketOrder {
+    @Override
     public int[] getBucketSequence(int nbw, int nbh) {
         int[] coords = new int[2 * nbw * nbh];
         int x = 0, y = 0, nx = 1, ny = 0;

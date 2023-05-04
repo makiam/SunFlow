@@ -3,10 +3,12 @@ package org.sunflow.core.filter;
 import org.sunflow.core.Filter;
 
 public class BlackmanHarrisFilter implements Filter {
+    @Override
     public float getSize() {
         return 4;
     }
 
+    @Override
     public float get(float x, float y) {
         return bh1d(x * 0.5f) * bh1d(y * 0.5f);
     }

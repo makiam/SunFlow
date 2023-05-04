@@ -13,6 +13,7 @@ import org.sunflow.util.FloatArray;
 import org.sunflow.util.IntArray;
 
 public class ShaveRibParser implements SceneParser {
+    @Override
     public boolean parse(String filename, SunflowAPIInterface api) {
         try {
             Parser p = new Parser(filename);

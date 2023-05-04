@@ -183,10 +183,12 @@ public class FastHashMap<K, V> implements Iterable<FastHashMap.Entry<K, V>> {
             } while (hasNext() && !readable());
         }
 
+        @Override
         public boolean hasNext() {
             return index < entries.length;
         }
 
+        @Override
         public Entry<K, V> next() {
             try {
                 return entries[index];
@@ -195,11 +197,13 @@ public class FastHashMap<K, V> implements Iterable<FastHashMap.Entry<K, V>> {
             }
         }
 
+        @Override
         public void remove() {
             throw new UnsupportedOperationException();
         }
     }
 
+    @Override
     public Iterator<Entry<K, V>> iterator() {
         return new EntryIterator();
     }

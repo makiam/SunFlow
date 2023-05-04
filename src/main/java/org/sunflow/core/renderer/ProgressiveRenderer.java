@@ -27,6 +27,7 @@ public class ProgressiveRenderer implements ImageSampler {
         smallBucketQueue = null;
     }
 
+    @Override
     public boolean prepare(Options options, Scene scene, int w, int h) {
         this.scene = scene;
         imageWidth = w;
@@ -35,6 +36,7 @@ public class ProgressiveRenderer implements ImageSampler {
         return true;
     }
 
+    @Override
     public void render(Display display) {
         this.display = display;
         display.imageBegin(imageWidth, imageHeight, 0);
@@ -147,6 +149,7 @@ public class ProgressiveRenderer implements ImageSampler {
         int x, y, size;
         float constrast;
 
+        @Override
         public int compareTo(SmallBucket o) {
             if (constrast < o.constrast)
                 return -1;

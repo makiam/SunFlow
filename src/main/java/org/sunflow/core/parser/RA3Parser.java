@@ -16,6 +16,7 @@ import org.sunflow.system.UI;
 import org.sunflow.system.UI.Module;
 
 public class RA3Parser implements SceneParser {
+    @Override
     public boolean parse(String filename, SunflowAPIInterface api) {
         try {
             UI.printInfo(Module.USER, "RA3 - Reading geometry: \"%s\" ...", filename);

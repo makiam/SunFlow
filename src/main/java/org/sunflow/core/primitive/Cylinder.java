@@ -15,10 +15,12 @@ import org.sunflow.math.Solvers;
 import org.sunflow.math.Vector3;
 
 public class Cylinder implements PrimitiveList {
+    @Override
     public boolean update(ParameterList pl, SunflowAPI api) {
         return true;
     }
 
+    @Override
     public BoundingBox getWorldBounds(Matrix4 o2w) {
         BoundingBox bounds = new BoundingBox(1);
         if (o2w != null)
@@ -26,14 +28,17 @@ public class Cylinder implements PrimitiveList {
         return bounds;
     }
 
+    @Override
     public float getPrimitiveBound(int primID, int i) {
         return (i & 1) == 0 ? -1 : 1;
     }
 
+    @Override
     public int getNumPrimitives() {
         return 1;
     }
 
+    @Override
     public void prepareShadingState(ShadingState state) {
         state.init();
         state.getRay().getPoint(state.getPoint());
@@ -59,6 +64,7 @@ public class Cylinder implements PrimitiveList {
         state.setBasis(OrthoNormalBasis.makeFromWV(state.getNormal(), v));
     }
 
+    @Override
     public void intersectPrimitive(Ray r, int primID, IntersectionState state) {
         // intersect in local space
         float qa = r.dx * r.dx + r.dy * r.dy;
@@ -87,6 +93,7 @@ public class Cylinder implements PrimitiveList {
         }
     }
 
+    @Override
     public PrimitiveList getBakingPrimitives() {
         return null;
     }

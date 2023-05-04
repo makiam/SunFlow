@@ -189,6 +189,7 @@ public class SunSkyLight implements LightSource, PrimitiveList, Shader {
         jacobian = (float) (2 * Math.PI * Math.PI) / (w * h);
     }
 
+    @Override
     public boolean update(ParameterList pl, SunflowAPI api) {
         Vector3 up = pl.getVector("up", null);
         Vector3 east = pl.getVector("east", null);
@@ -224,18 +225,22 @@ public class SunSkyLight implements LightSource, PrimitiveList, Shader {
         return RGBSpace.SRGB.convertXYZtoRGB(X, (float) Y, Z);
     }
 
+    @Override
     public int getNumSamples() {
         return 1 + numSkySamples;
     }
 
+    @Override
     public void getPhoton(double randX1, double randY1, double randX2, double randY2, Point3 p, Vector3 dir, Color power) {
         // FIXME: not implemented
     }
 
+    @Override
     public float getPower() {
         return 0;
     }
 
+    @Override
     public void getSamples(ShadingState state) {
         if (Vector3.dot(sunDirWorld, state.getGeoNormal()) > 0 && Vector3.dot(sunDirWorld, state.getNormal()) > 0) {
             LightSample dest = new LightSample();
@@ -285,36 +290,44 @@ public class SunSkyLight implements LightSource, PrimitiveList, Shader {
         }
     }
 
+    @Override
     public PrimitiveList getBakingPrimitives() {
         return null;
     }
 
+    @Override
     public int getNumPrimitives() {
         return 1;
     }
 
+    @Override
     public float getPrimitiveBound(int primID, int i) {
         return 0;
     }
 
+    @Override
     public BoundingBox getWorldBounds(Matrix4 o2w) {
         return null;
     }
 
+    @Override
     public void intersectPrimitive(Ray r, int primID, IntersectionState state) {
         if (r.getMax() == Float.POSITIVE_INFINITY)
             state.setIntersection(0);
     }
 
+    @Override
     public void prepareShadingState(ShadingState state) {
         if (state.includeLights())
             state.setShader(this);
     }
 
+    @Override
     public Color getRadiance(ShadingState state) {
         return getSkyRGB(basis.untransform(state.getRay().getDirection())).constrainRGB();
     }
 
+    @Override
     public void scatterPhoton(ShadingState state, Color power) {
         // let photon escape
     }
@@ -331,6 +344,7 @@ public class SunSkyLight implements LightSource, PrimitiveList, Shader {
         return dest;
     }
 
+    @Override
     public Instance createInstance() {
         return Instance.createTemporary(this, null, this);
     }

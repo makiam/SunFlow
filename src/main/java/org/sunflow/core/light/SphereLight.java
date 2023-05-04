@@ -30,6 +30,7 @@ public class SphereLight implements LightSource, Shader {
         radius = r2 = 1;
     }
 
+    @Override
     public boolean update(ParameterList pl, SunflowAPI api) {
         radiance = pl.getColor("radiance", radiance);
         numSamples = pl.getInt("samples", numSamples);
@@ -39,6 +40,7 @@ public class SphereLight implements LightSource, Shader {
         return true;
     }
 
+    @Override
     public int getNumSamples() {
         return numSamples;
     }
@@ -51,6 +53,7 @@ public class SphereLight implements LightSource, Shader {
         return state.getPoint().distanceToSquared(center) > r2;
     }
 
+    @Override
     public void getSamples(ShadingState state) {
         if (getNumSamples() <= 0)
             return;
@@ -108,6 +111,7 @@ public class SphereLight implements LightSource, Shader {
         }
     }
 
+    @Override
     public void getPhoton(double randX1, double randY1, double randX2, double randY2, Point3 p, Vector3 dir, Color power) {
         float z = (float) (1 - 2 * randX2);
         float r = (float) Math.sqrt(Math.max(0, 1 - z * z));
@@ -131,10 +135,12 @@ public class SphereLight implements LightSource, Shader {
         power.mul((float) (Math.PI * Math.PI * 4 * r2));
     }
 
+    @Override
     public float getPower() {
         return radiance.copy().mul((float) (Math.PI * Math.PI * 4 * r2)).getLuminance();
     }
 
+    @Override
     public Color getRadiance(ShadingState state) {
         if (!state.includeLights())
             return Color.BLACK;
@@ -143,10 +149,12 @@ public class SphereLight implements LightSource, Shader {
         return state.isBehind() ? Color.BLACK : radiance;
     }
 
+    @Override
     public void scatterPhoton(ShadingState state, Color power) {
         // do not scatter photons
     }
 
+    @Override
     public Instance createInstance() {
         return Instance.createTemporary(new Sphere(), Matrix4.translation(center.x, center.y, center.z).multiply(Matrix4.scale(radius)), this);
     }

@@ -69,6 +69,7 @@ public class BucketRenderer implements ImageSampler {
         dumpBuckets = false; // for debugging only - not user settable
     }
 
+    @Override
     public boolean prepare(Options options, Scene scene, int w, int h) {
         this.scene = scene;
         imageWidth = w;
@@ -142,6 +143,7 @@ public class BucketRenderer implements ImageSampler {
         return String.format("%s%d sample%s", depth < 0 ? "1/" : "", pixelAA * pixelAA, depth == 0 ? "" : "s");
     }
 
+    @Override
     public void render(Display display) {
         this.display = display;
         display.imageBegin(imageWidth, imageHeight, bucketSize);

@@ -18,10 +18,12 @@ public class ConsoleInterface implements UserInterface {
     public ConsoleInterface() {
     }
 
+    @Override
     public void print(Module m, PrintLevel level, String s) {
         System.err.println(UI.formatOutput(m, level, s));
     }
 
+    @Override
     public void taskStart(String s, int min, int max) {
         task = s;
         this.min = min;
@@ -30,12 +32,14 @@ public class ConsoleInterface implements UserInterface {
         invP = 100.0f / (max - min);
     }
 
+    @Override
     public void taskUpdate(int current) {
         int p = (min == max) ? 0 : (int) ((current - min) * invP);
         if (p != lastP)
             System.err.print(task + " [" + (lastP = p) + "%]\r");
     }
 
+    @Override
     public void taskStop() {
         System.err.print("                                                                      \r");
     }

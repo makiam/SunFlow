@@ -10,6 +10,7 @@ import org.sunflow.image.BitmapReader;
 import org.sunflow.image.formats.BitmapRGBE;
 
 public class HDRBitmapReader implements BitmapReader {
+    @Override
     public Bitmap load(String filename, boolean isLinear) throws IOException, BitmapFormatException {
         // load radiance rgbe file
         InputStream f = new BufferedInputStream(new FileInputStream(filename));

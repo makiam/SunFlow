@@ -25,6 +25,7 @@ public class FrameDisplay implements Display {
         frame = null;
     }
 
+    @Override
     public void imageBegin(int w, int h, int bucketSize) {
         if (frame == null) {
             frame = new RenderFrame();
@@ -45,18 +46,22 @@ public class FrameDisplay implements Display {
             frame.imagePanel.imageBegin(w, h, bucketSize);
     }
 
+    @Override
     public void imagePrepare(int x, int y, int w, int h, int id) {
         frame.imagePanel.imagePrepare(x, y, w, h, id);
     }
 
+    @Override
     public void imageUpdate(int x, int y, int w, int h, Color[] data, float[] alpha) {
         frame.imagePanel.imageUpdate(x, y, w, h, data, alpha);
     }
 
+    @Override
     public void imageFill(int x, int y, int w, int h, Color c, float alpha) {
         frame.imagePanel.imageFill(x, y, w, h, c, alpha);
     }
 
+    @Override
     public void imageEnd() {
         frame.imagePanel.imageEnd();
         if (filename != null)

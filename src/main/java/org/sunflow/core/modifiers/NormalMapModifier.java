@@ -15,6 +15,7 @@ public class NormalMapModifier implements Modifier {
         normalMap = null;
     }
 
+    @Override
     public boolean update(ParameterList pl, SunflowAPI api) {
         String filename = pl.getString("texture", null);
         if (filename != null)
@@ -22,6 +23,7 @@ public class NormalMapModifier implements Modifier {
         return normalMap != null;
     }
 
+    @Override
     public void modify(ShadingState state) {
         // apply normal map
         state.getNormal().set(normalMap.getNormal(state.getUV().x, state.getUV().y, state.getBasis()));

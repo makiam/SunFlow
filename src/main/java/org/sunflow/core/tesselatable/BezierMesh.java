@@ -33,6 +33,7 @@ public class BezierMesh implements Tesselatable {
         this.patches = patches;
     }
 
+    @Override
     public BoundingBox getWorldBounds(Matrix4 o2w) {
         BoundingBox bounds = new BoundingBox();
         if (o2w == null) {
@@ -122,6 +123,7 @@ public class BezierMesh implements Tesselatable {
         }
     }
 
+    @Override
     public PrimitiveList tesselate() {
         float[] vertices = new float[patches.length * (subdivs + 1) * (subdivs + 1) * 3];
         float[] normals = smooth ? new float[patches.length * (subdivs + 1) * (subdivs + 1) * 3] : null;
@@ -198,6 +200,7 @@ public class BezierMesh implements Tesselatable {
         return m;
     }
 
+    @Override
     public boolean update(ParameterList pl, SunflowAPI api) {
         subdivs = pl.getInt("subdivs", subdivs);
         smooth = pl.getBoolean("smooth", smooth);

@@ -52,6 +52,7 @@ public class SphereFlake implements PrimitiveList {
         }
     }
 
+    @Override
     public boolean update(ParameterList pl, SunflowAPI api) {
         level = MathUtils.clamp(pl.getInt("level", level), 0, 20);
         axis = pl.getVector("axis", axis);
@@ -60,6 +61,7 @@ public class SphereFlake implements PrimitiveList {
         return true;
     }
 
+    @Override
     public BoundingBox getWorldBounds(Matrix4 o2w) {
         BoundingBox bounds = new BoundingBox(getPrimitiveBound(0, 1));
         if (o2w != null)
@@ -67,15 +69,18 @@ public class SphereFlake implements PrimitiveList {
         return bounds;
     }
 
+    @Override
     public float getPrimitiveBound(int primID, int i) {
         float br = 1 + boundingRadiusOffset[level];
         return (i & 1) == 0 ? -br : br;
     }
 
+    @Override
     public int getNumPrimitives() {
         return 1;
     }
 
+    @Override
     public void prepareShadingState(ShadingState state) {
         state.init();
         state.getRay().getPoint(state.getPoint());
@@ -112,6 +117,7 @@ public class SphereFlake implements PrimitiveList {
 
     }
 
+    @Override
     public void intersectPrimitive(Ray r, int primID, IntersectionState state) {
         // intersect in local space
         float qa = r.dx * r.dx + r.dy * r.dy + r.dz * r.dz;
@@ -213,6 +219,7 @@ public class SphereFlake implements PrimitiveList {
         }
     }
 
+    @Override
     public PrimitiveList getBakingPrimitives() {
         return null;
     }

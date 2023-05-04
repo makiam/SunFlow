@@ -18,6 +18,7 @@ public class FakeGIEngine implements GIEngine {
     private Color sky;
     private Color ground;
 
+    @Override
     public Color getIrradiance(ShadingState state, Color diffuseReflectance) {
         float cosTheta = Vector3.dot(up, state.getNormal());
         float sin2 = (1 - cosTheta * cosTheta);
@@ -28,10 +29,12 @@ public class FakeGIEngine implements GIEngine {
             return Color.blend(ground, sky, sine);
     }
 
+    @Override
     public Color getGlobalRadiance(ShadingState state) {
         return Color.BLACK;
     }
 
+    @Override
     public boolean init(Options options, Scene scene) {
         up = options.getVector("gi.fake.up", new Vector3(0, 1, 0)).normalize();
         sky = options.getColor("gi.fake.sky", Color.WHITE).copy();

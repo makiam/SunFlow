@@ -25,15 +25,18 @@ public class ParticleSurface implements PrimitiveList {
         n = 0;
     }
 
+    @Override
     public int getNumPrimitives() {
         return n;
     }
 
+    @Override
     public float getPrimitiveBound(int primID, int i) {
         float c = particles[primID * 3 + (i >>> 1)];
         return (i & 1) == 0 ? c - r : c + r;
     }
 
+    @Override
     public BoundingBox getWorldBounds(Matrix4 o2w) {
         BoundingBox bounds = new BoundingBox();
         for (int i = 0, i3 = 0; i < n; i++, i3 += 3)
@@ -43,6 +46,7 @@ public class ParticleSurface implements PrimitiveList {
         return o2w == null ? bounds : o2w.transform(bounds);
     }
 
+    @Override
     public void intersectPrimitive(Ray r, int primID, IntersectionState state) {
         int i3 = primID * 3;
         float ocx = r.ox - particles[i3 + 0];
@@ -64,6 +68,7 @@ public class ParticleSurface implements PrimitiveList {
         }
     }
 
+    @Override
     public void prepareShadingState(ShadingState state) {
         state.init();
         state.getRay().getPoint(state.getPoint());
@@ -86,6 +91,7 @@ public class ParticleSurface implements PrimitiveList {
         state.setBasis(OrthoNormalBasis.makeFromW(state.getNormal()));
     }
 
+    @Override
     public boolean update(ParameterList pl, SunflowAPI api) {
         FloatParameter p = pl.getPointArray("particles");
         if (p != null)
@@ -96,6 +102,7 @@ public class ParticleSurface implements PrimitiveList {
         return particles != null && n <= (particles.length / 3);
     }
 
+    @Override
     public PrimitiveList getBakingPrimitives() {
         return null;
     }

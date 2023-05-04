@@ -23,6 +23,7 @@ public class InstantGI implements GIEngine {
     private int numBias;
     private PointLight[][] virtualLights;
 
+    @Override
     public Color getGlobalRadiance(ShadingState state) {
         Point3 p = state.getPoint();
         Vector3 n = state.getNormal();
@@ -43,6 +44,7 @@ public class InstantGI implements GIEngine {
         return pow == null ? Color.BLACK : pow.copy().mul(1.0f / maxAvgPow);
     }
 
+    @Override
     public boolean init(Options options, Scene scene) {
         numPhotons = options.getInt("gi.igi.samples", 64);
         numSets = options.getInt("gi.igi.sets", 1);
@@ -73,6 +75,7 @@ public class InstantGI implements GIEngine {
         return true;
     }
 
+    @Override
     public Color getIrradiance(ShadingState state, Color diffuseReflectance) {
         float b = (float) Math.PI * c / diffuseReflectance.getMax();
         Color irr = Color.black();
@@ -140,13 +143,16 @@ public class InstantGI implements GIEngine {
     private class PointLightStore implements PhotonStore {
         ArrayList<PointLight> virtualLights = new ArrayList<PointLight>();
 
+        @Override
         public int numEmit() {
             return numPhotons;
         }
 
+        @Override
         public void prepare(Options options, BoundingBox sceneBounds) {
         }
 
+        @Override
         public void store(ShadingState state, Vector3 dir, Color power, Color diffuse) {
             state.faceforward();
             PointLight vpl = new PointLight();
@@ -158,17 +164,21 @@ public class InstantGI implements GIEngine {
             }
         }
 
+        @Override
         public void init() {
         }
 
+        @Override
         public boolean allowDiffuseBounced() {
             return true;
         }
 
+        @Override
         public boolean allowReflectionBounced() {
             return true;
         }
 
+        @Override
         public boolean allowRefractionBounced() {
             return true;
         }

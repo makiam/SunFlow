@@ -14,6 +14,7 @@ import org.sunflow.image.formats.BitmapXYZ;
  * http://www2.indigorenderer.com/joomla/forum/viewtopic.php?p=11430
  */
 public class IGIBitmapReader implements BitmapReader {
+    @Override
     public Bitmap load(String filename, boolean isLinear) throws IOException, BitmapFormatException {
         InputStream stream = new BufferedInputStream(new FileInputStream(filename));
         // read header

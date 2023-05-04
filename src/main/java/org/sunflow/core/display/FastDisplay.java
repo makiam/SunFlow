@@ -31,6 +31,7 @@ public class FastDisplay extends JPanel implements Display {
         seconds = 0;
     }
 
+    @Override
     public synchronized void imageBegin(int w, int h, int bucketSize) {
         if (frame != null && image != null && w == image.getWidth() && h == image.getHeight()) {
             // nothing to do
@@ -60,9 +61,11 @@ public class FastDisplay extends JPanel implements Display {
         t.start();
     }
 
+    @Override
     public void imagePrepare(int x, int y, int w, int h, int id) {
     }
 
+    @Override
     public void imageUpdate(int x, int y, int w, int h, Color[] data, float[] alpha) {
         int iw = image.getWidth();
         int off = x + iw * y;
@@ -72,6 +75,7 @@ public class FastDisplay extends JPanel implements Display {
                 pixels[off] = 0xFF000000 | data[index].toRGB();
     }
 
+    @Override
     public void imageFill(int x, int y, int w, int h, Color c, float alpha) {
         int iw = image.getWidth();
         int off = x + iw * y;
@@ -82,6 +86,7 @@ public class FastDisplay extends JPanel implements Display {
                 pixels[off] = rgb;
     }
 
+    @Override
     public synchronized void imageEnd() {
         // copy buffer
         image.setRGB(0, 0, image.getWidth(), image.getHeight(), pixels, 0, image.getWidth());

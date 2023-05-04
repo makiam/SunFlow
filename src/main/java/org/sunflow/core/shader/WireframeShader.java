@@ -24,6 +24,7 @@ public class WireframeShader implements Shader {
         cosWidth = (float) Math.cos(width);
     }
 
+    @Override
     public boolean update(ParameterList pl, SunflowAPI api) {
         lineColor = pl.getColor("line", lineColor);
         fillColor = pl.getColor("fill", fillColor);
@@ -40,6 +41,7 @@ public class WireframeShader implements Shader {
         return lineColor;
     }
 
+    @Override
     public Color getRadiance(ShadingState state) {
         Point3[] p = new Point3[3];
         if (!state.getTrianglePoints(p))
@@ -71,6 +73,7 @@ public class WireframeShader implements Shader {
         return getFillColor(state);
     }
 
+    @Override
     public void scatterPhoton(ShadingState state, Color power) {
     }
 }

@@ -43,6 +43,7 @@ public class Instance implements RenderObject {
         return i;
     }
 
+    @Override
     public boolean update(ParameterList pl, SunflowAPI api) {
         String geometryName = pl.getString("geometry", null);
         if (geometry == null || geometryName != null) {

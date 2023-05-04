@@ -12,6 +12,7 @@ import org.sunflow.image.Color;
 import org.sunflow.image.formats.BitmapRGBA8;
 
 public class PNGBitmapReader implements BitmapReader {
+    @Override
     public Bitmap load(String filename, boolean isLinear) throws IOException, BitmapFormatException {
         // regular image, load using Java api
         BufferedImage bi = ImageIO.read(new File(filename));

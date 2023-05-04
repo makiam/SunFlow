@@ -32,10 +32,12 @@ public class Hair implements PrimitiveList, Shader {
         widths = new FloatParameter(1.0f);
     }
 
+    @Override
     public int getNumPrimitives() {
         return numSegments * (points.length / (3 * (numSegments + 1)));
     }
 
+    @Override
     public float getPrimitiveBound(int primID, int i) {
         int hair = primID / numSegments;
         int line = primID % numSegments;
@@ -51,6 +53,7 @@ public class Hair implements PrimitiveList, Shader {
         }
     }
 
+    @Override
     public BoundingBox getWorldBounds(Matrix4 o2w) {
         BoundingBox bounds = new BoundingBox();
         for (int i = 0, j = 0; i < points.length; i += 3, j++) {
@@ -103,6 +106,7 @@ public class Hair implements PrimitiveList, Shader {
         }
     }
 
+    @Override
     public void intersectPrimitive(Ray r, int primID, IntersectionState state) {
         int hair = primID / numSegments;
         int line = primID % numSegments;
@@ -167,6 +171,7 @@ public class Hair implements PrimitiveList, Shader {
         }
     }
 
+    @Override
     public void prepareShadingState(ShadingState state) {
         state.init();
         Instance i = state.getInstance();
@@ -193,6 +198,7 @@ public class Hair implements PrimitiveList, Shader {
         state.getUV().set(0, (line + state.getV()) / numSegments);
     }
 
+    @Override
     public boolean update(ParameterList pl, SunflowAPI api) {
         numSegments = pl.getInt("segments", numSegments);
         if (numSegments < 1) {
@@ -223,6 +229,7 @@ public class Hair implements PrimitiveList, Shader {
         return true;
     }
 
+    @Override
     public Color getRadiance(ShadingState state) {
         // don't use these - gather lights for sphere of directions
         // gather lights
@@ -252,9 +259,11 @@ public class Hair implements PrimitiveList, Shader {
         return Color.blend(c, state.traceTransparency(), state.getV(), new Color());
     }
 
+    @Override
     public void scatterPhoton(ShadingState state, Color power) {
     }
 
+    @Override
     public PrimitiveList getBakingPrimitives() {
         return null;
     }

@@ -28,6 +28,7 @@ public class Plane implements PrimitiveList {
         cnu = cnv = cnd = 0;
     }
 
+    @Override
     public boolean update(ParameterList pl, SunflowAPI api) {
         center = pl.getPoint("center", center);
         Point3 b = pl.getPoint("point1", null);
@@ -89,6 +90,7 @@ public class Plane implements PrimitiveList {
         return true;
     }
 
+    @Override
     public void prepareShadingState(ShadingState state) {
         state.init();
         state.getRay().getPoint(state.getPoint());
@@ -124,6 +126,7 @@ public class Plane implements PrimitiveList {
         state.setBasis(OrthoNormalBasis.makeFromW(normal));
     }
 
+    @Override
     public void intersectPrimitive(Ray r, int primID, IntersectionState state) {
         float dn = normal.x * r.dx + normal.y * r.dy + normal.z * r.dz;
         if (dn == 0.0)
@@ -135,18 +138,22 @@ public class Plane implements PrimitiveList {
         }
     }
 
+    @Override
     public int getNumPrimitives() {
         return 1;
     }
 
+    @Override
     public float getPrimitiveBound(int primID, int i) {
         return 0;
     }
 
+    @Override
     public BoundingBox getWorldBounds(Matrix4 o2w) {
         return null;
     }
 
+    @Override
     public PrimitiveList getBakingPrimitives() {
         return null;
     }

@@ -131,6 +131,7 @@ public class KDTree implements AccelerationStructure {
         KDTree.dumpPrefix = prefix;
     }
 
+    @Override
     public void build(PrimitiveList primitives) {
         UI.printDetailed(Module.ACCEL, "KDTree settings");
         UI.printDetailed(Module.ACCEL, "  * Max Leaf Size:  %d", maxPrims);
@@ -640,6 +641,7 @@ public class KDTree implements AccelerationStructure {
         task.splits = null;
     }
 
+    @Override
     public void intersect(Ray r, IntersectionState state) {
         float intervalMin = r.getMin();
         float intervalMax = r.getMax();

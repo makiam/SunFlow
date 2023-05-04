@@ -26,6 +26,7 @@ public class Camera implements RenderObject {
         shutterOpen = shutterClose = 0;
     }
 
+    @Override
     public boolean update(ParameterList pl, SunflowAPI api) {
         shutterOpen = pl.getFloat("shutter.open", shutterOpen);
         shutterClose = pl.getFloat("shutter.close", shutterClose);
