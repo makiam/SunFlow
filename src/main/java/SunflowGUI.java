@@ -14,12 +14,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
-
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
-import javax.swing.plaf.metal.DefaultMetalTheme;
-import javax.swing.plaf.metal.MetalLookAndFeel;
-
 import org.sunflow.Benchmark;
 import org.sunflow.RealtimeBenchmark;
 import org.sunflow.SunflowAPI;
@@ -33,9 +29,9 @@ import org.sunflow.core.primitive.TriangleMesh;
 import org.sunflow.system.ImagePanel;
 import org.sunflow.system.Timer;
 import org.sunflow.system.UI;
-import org.sunflow.system.UserInterface;
 import org.sunflow.system.UI.Module;
 import org.sunflow.system.UI.PrintLevel;
+import org.sunflow.system.UserInterface;
 
 @SuppressWarnings("serial")
 public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
@@ -136,8 +132,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
             System.out.println("  -bench           Run several built-in scenes for benchmark purposes");
             System.out.println("  -rtbench         Run realtime ray-tracing benchmark");
             System.out.println("  -frame n         Set frame number to the specified value");
-            System.out.println("  -anim n1 n2      Render all frames between the two specified values (inclusive)");
-            System.out.println("  -translate file  Translate input scene to the specified filename");
+            System.out.println("  -anim n1 n2      Render all frames between the two specified values (inclusive)");            
             System.out.println("  -v verbosity     Set the verbosity level: 0=none,1=errors,2=warnings,3=info,4=detailed");
             System.out.println("  -h               Prints this message");
         }
@@ -170,7 +165,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
             String filterType = null;
             boolean runBenchmark = false;
             boolean runRTBenchmark = false;
-            String translateFilename = null;
+
             int frameStart = 1, frameStop = 1;
             while (i < args.length) {
                 if (args[i].equals("-o")) {
@@ -327,11 +322,6 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                         usage(false);
                     UI.verbosity(Integer.parseInt(args[i + 1]));
                     i += 2;
-                } else if (args[i].equals("-translate")) {
-                    if (i > args.length - 2)
-                        usage(false);
-                    translateFilename = args[i + 1];
-                    i += 2;
                 } else if (args[i].equals("-h") || args[i].equals("-help")) {
                     usage(true);
                 } else {
@@ -354,10 +344,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
             if (input == null)
                 usage(false);
             SunflowAPI.runSystemCheck();
-            if (translateFilename != null) {
-                SunflowAPI.translate(input, translateFilename);
-                return;
-            }
+
             if (frameStart < frameStop && showFrame) {
                 UI.printWarning(Module.GUI, "Animations should not be rendered without -nogui - forcing GUI off anyway");
                 showFrame = false;
@@ -479,23 +466,13 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                         renderButton = new JButton();
                         jPanel1.add(renderButton);
                         renderButton.setText("Render");
-                        renderButton.addActionListener(new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent evt) {
-                                renderMenuItemActionPerformed(evt);
-                            }
-                        });
+                        renderButton.addActionListener(this::renderMenuItemActionPerformed);
                     }
                     {
                         iprButton = new JButton();
                         jPanel1.add(iprButton);
                         iprButton.setText("IPR");
-                        iprButton.addActionListener(new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent evt) {
-                                iprMenuItemActionPerformed(evt);
-                            }
-                        });
+                        iprButton.addActionListener(this::iprMenuItemActionPerformed);
                     }
                 }
                 {
