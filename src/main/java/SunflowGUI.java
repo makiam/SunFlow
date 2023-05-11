@@ -14,14 +14,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
-
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
-import javax.swing.plaf.metal.DefaultMetalTheme;
-import javax.swing.plaf.metal.MetalLookAndFeel;
-
-import org.sunflow.Benchmark;
-import org.sunflow.RealtimeBenchmark;
 import org.sunflow.SunflowAPI;
 import org.sunflow.core.Display;
 import org.sunflow.core.TextureCache;
@@ -33,9 +27,9 @@ import org.sunflow.core.primitive.TriangleMesh;
 import org.sunflow.system.ImagePanel;
 import org.sunflow.system.Timer;
 import org.sunflow.system.UI;
-import org.sunflow.system.UserInterface;
 import org.sunflow.system.UI.Module;
 import org.sunflow.system.UI.PrintLevel;
+import org.sunflow.system.UserInterface;
 
 @SuppressWarnings("serial")
 public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
@@ -133,8 +127,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
             System.out.println("  -bake name       Bakes a lightmap for the specified instance");
             System.out.println("  -bakedir dir     Selects the type of lightmap baking: dir=view or ortho");
             System.out.println("  -filter type     Selects the image filter to use");
-            System.out.println("  -bench           Run several built-in scenes for benchmark purposes");
-            System.out.println("  -rtbench         Run realtime ray-tracing benchmark");
+
             System.out.println("  -frame n         Set frame number to the specified value");
             System.out.println("  -anim n1 n2      Render all frames between the two specified values (inclusive)");
             System.out.println("  -translate file  Translate input scene to the specified filename");
@@ -168,8 +161,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
             String bakingName = null;
             boolean bakeViewdep = false;
             String filterType = null;
-            boolean runBenchmark = false;
-            boolean runRTBenchmark = false;
+
             String translateFilename = null;
             int frameStart = 1, frameStop = 1;
             while (i < args.length) {
@@ -305,12 +297,6 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                         usage(false);
                     filterType = args[i + 1];
                     i += 2;
-                } else if (args[i].equals("-bench")) {
-                    runBenchmark = true;
-                    i++;
-                } else if (args[i].equals("-rtbench")) {
-                    runRTBenchmark = true;
-                    i++;
                 } else if (args[i].equals("-frame")) {
                     if (i > args.length - 2)
                         usage(false);
@@ -341,16 +327,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                     i++;
                 }
             }
-            if (runBenchmark) {
-                SunflowAPI.runSystemCheck();
-                new Benchmark().execute();
-                return;
-            }
-            if (runRTBenchmark) {
-                SunflowAPI.runSystemCheck();
-                new RealtimeBenchmark(showFrame, threads);
-                return;
-            }
+
             if (input == null)
                 usage(false);
             SunflowAPI.runSystemCheck();
