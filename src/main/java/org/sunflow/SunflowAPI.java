@@ -626,44 +626,6 @@ public class SunflowAPI implements SunflowAPIInterface {
         return api;
     }
 
-    /**
-     * Translate specfied file into the native sunflow scene file format.
-     * 
-     * @param filename input filename
-     * @param outputFilename output filename
-     * @return <code>true</code> upon success, <code>false</code> otherwise
-     */
-    public static boolean translate(String filename, String outputFilename) {
-        FileSunflowAPI api = null;
-        try {
-            if (outputFilename.endsWith(".sca"))
-                api = new AsciiFileSunflowAPI(outputFilename);
-            else if (outputFilename.endsWith(".scb"))
-                api = new BinaryFileSunflowAPI(outputFilename);
-            else {
-                UI.printError(Module.API, "Unable to determine output filetype: \"%s\"", outputFilename);
-                return false;
-            }
-        } catch (IOException e) {
-            UI.printError(Module.API, "Unable to create output file - %s", e.getMessage());
-            return false;
-        }
-        String extension = filename.substring(filename.lastIndexOf('.') + 1);
-        SceneParser parser = PluginRegistry.parserPlugins.createObject(extension);
-        if (parser == null) {
-            UI.printError(Module.API, "Unable to find a suitable parser for: \"%s\"", filename);
-            return false;
-        }
-        try {
-            return parser.parse(filename, api);
-        } catch (RuntimeException e) {
-            e.printStackTrace();
-            UI.printError(Module.API, "Error occured during translation: %s", e.getMessage());
-            return false;
-        } finally {
-            api.close();
-        }
-    }
 
     /**
      * Compile the specified code string via Janino. The code must implement a
