@@ -72,7 +72,7 @@ public class FastHashMap<K, V> implements Iterable<FastHashMap.Entry<K, V>> {
         // did we find a spot for insertion among the deleted values ?
         if (pos < entries.length)
             hash = pos;
-        entries[hash] = new Entry<K, V>(k, v);
+        entries[hash] = new Entry<>(k, v);
         size++;
         if (size * 2 > entries.length)
             resize(entries.length * 2);
@@ -146,7 +146,7 @@ public class FastHashMap<K, V> implements Iterable<FastHashMap.Entry<K, V>> {
                 t++;
                 hash += t;
             }
-            newentries[hash] = new Entry<K, V>(e.k, e.v);
+            newentries[hash] = new Entry<>(e.k, e.v);
         }
         // copy new entries over old ones
         entries = newentries;

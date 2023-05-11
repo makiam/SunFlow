@@ -40,7 +40,7 @@ public final class CausticPhotonMap implements CausticPhotonMapInterface {
         bounds = new BoundingBox();
         maxPower = 0;
         maxRadius = 0;
-        photonList = new ArrayList<Photon>();
+        photonList = new ArrayList<>();
         photonList.add(null);
         photons = null;
         storedPhotons = halfStoredPhotons = 0;

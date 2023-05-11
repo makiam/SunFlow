@@ -10,7 +10,7 @@ import org.sunflow.system.UI.Module;
  * texture might be used more than once in your scene.
  */
 public final class TextureCache {
-    private static HashMap<String, Texture> textures = new HashMap<String, Texture>();
+    private static HashMap<String, Texture> textures = new HashMap<>();
 
     private TextureCache() {
     }

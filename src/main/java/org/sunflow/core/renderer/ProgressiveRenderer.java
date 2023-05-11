@@ -47,7 +47,7 @@ public class ProgressiveRenderer implements ImageSampler {
         b.size = 1;
         while (b.size < s)
             b.size <<= 1;
-        smallBucketQueue = new PriorityBlockingQueue<SmallBucket>();
+        smallBucketQueue = new PriorityBlockingQueue<>();
         smallBucketQueue.add(b);
         UI.taskStart("Progressive Render", 0, imageWidth * imageHeight);
         Timer t = new Timer();

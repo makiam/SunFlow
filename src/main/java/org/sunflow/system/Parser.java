@@ -80,7 +80,7 @@ public class Parser {
         if (line == null)
             return false;
 
-        ArrayList<String> tokenList = new ArrayList<String>();
+        ArrayList<String> tokenList = new ArrayList<>();
         String current = new String();
         boolean inQuotes = false;
 

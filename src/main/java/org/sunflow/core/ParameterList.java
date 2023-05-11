@@ -33,7 +33,7 @@ public class ParameterList {
      * Creates an empty ParameterList.
      */
     public ParameterList() {
-        list = new FastHashMap<String, Parameter>();
+        list = new FastHashMap<>();
         numVerts = numFaces = numFaceVerts = 0;
     }
 

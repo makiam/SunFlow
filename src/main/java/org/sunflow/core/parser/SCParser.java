@@ -39,7 +39,7 @@ public class SCParser implements SceneParser {
     private HashMap<String, Integer> objectNames;
 
     public SCParser() {
-        objectNames = new HashMap<String, Integer>();
+        objectNames = new HashMap<>();
         instanceCounter++;
         instanceNumber = instanceCounter;
     }

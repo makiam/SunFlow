@@ -12,7 +12,7 @@ public class SearchPath {
 
     public SearchPath(String type) {
         this.type = type;
-        searchPath = new LinkedList<String>();
+        searchPath = new LinkedList<>();
     }
 
     public void resetSearchPath() {

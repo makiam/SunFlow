@@ -1,7 +1,6 @@
 package org.sunflow.core;
 
 import java.util.ArrayList;
-
 import org.sunflow.core.display.FrameDisplay;
 import org.sunflow.image.Color;
 import org.sunflow.math.BoundingBox;
@@ -238,24 +237,24 @@ public class Scene {
             if (lightInstance != null) {
                 if (lightInstance.getBounds() == null) {
                     if (infiniteAreaLights == null)
-                        infiniteAreaLights = new ArrayList<Instance>();
+                        infiniteAreaLights = new ArrayList<>();
                     infiniteAreaLights.add(lightInstance);
                 } else {
                     if (areaLights == null)
-                        areaLights = new ArrayList<Instance>();
+                        areaLights = new ArrayList<>();
                     areaLights.add(lightInstance);
                 }
             }
         }
         // add area light sources to the list of instances if they exist
-        if (infiniteAreaLights != null && infiniteAreaLights.size() > 0)
-            infiniteInstanceList.addLightSourceInstances(infiniteAreaLights.toArray(new Instance[infiniteAreaLights.size()]));
-        else
+        if (infiniteAreaLights == null || infiniteAreaLights.isEmpty())
             infiniteInstanceList.clearLightSources();
-        if (areaLights != null && areaLights.size() > 0)
-            instanceList.addLightSourceInstances(areaLights.toArray(new Instance[areaLights.size()]));
         else
+            infiniteInstanceList.addLightSourceInstances(infiniteAreaLights.toArray(new Instance[infiniteAreaLights.size()]));
+        if (areaLights == null || areaLights.isEmpty())
             instanceList.clearLightSources();
+        else
+            instanceList.addLightSourceInstances(areaLights.toArray(new Instance[areaLights.size()]));
         // FIXME: this _could_ be done incrementally to avoid top-level rebuilds
         // each frame
         rebuildAccel = true;

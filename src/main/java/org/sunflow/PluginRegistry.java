@@ -129,24 +129,24 @@ import org.sunflow.system.Plugins;
  */
 public final class PluginRegistry {
     // base types - needed by SunflowAPI
-    public static final Plugins<PrimitiveList> primitivePlugins = new Plugins<PrimitiveList>(PrimitiveList.class);
-    public static final Plugins<Tesselatable> tesselatablePlugins = new Plugins<Tesselatable>(Tesselatable.class);
-    public static final Plugins<Shader> shaderPlugins = new Plugins<Shader>(Shader.class);
-    public static final Plugins<Modifier> modifierPlugins = new Plugins<Modifier>(Modifier.class);
-    public static final Plugins<LightSource> lightSourcePlugins = new Plugins<LightSource>(LightSource.class);
-    public static final Plugins<CameraLens> cameraLensPlugins = new Plugins<CameraLens>(CameraLens.class);
+    public static final Plugins<PrimitiveList> primitivePlugins = new Plugins<>(PrimitiveList.class);
+    public static final Plugins<Tesselatable> tesselatablePlugins = new Plugins<>(Tesselatable.class);
+    public static final Plugins<Shader> shaderPlugins = new Plugins<>(Shader.class);
+    public static final Plugins<Modifier> modifierPlugins = new Plugins<>(Modifier.class);
+    public static final Plugins<LightSource> lightSourcePlugins = new Plugins<>(LightSource.class);
+    public static final Plugins<CameraLens> cameraLensPlugins = new Plugins<>(CameraLens.class);
 
     // advanced types - used inside the Sunflow core
-    public static final Plugins<AccelerationStructure> accelPlugins = new Plugins<AccelerationStructure>(AccelerationStructure.class);
-    public static final Plugins<BucketOrder> bucketOrderPlugins = new Plugins<BucketOrder>(BucketOrder.class);
-    public static final Plugins<Filter> filterPlugins = new Plugins<Filter>(Filter.class);
-    public static final Plugins<GIEngine> giEnginePlugins = new Plugins<GIEngine>(GIEngine.class);
-    public static final Plugins<CausticPhotonMapInterface> causticPhotonMapPlugins = new Plugins<CausticPhotonMapInterface>(CausticPhotonMapInterface.class);
-    public static final Plugins<GlobalPhotonMapInterface> globalPhotonMapPlugins = new Plugins<GlobalPhotonMapInterface>(GlobalPhotonMapInterface.class);
-    public static final Plugins<ImageSampler> imageSamplerPlugins = new Plugins<ImageSampler>(ImageSampler.class);
-    public static final Plugins<SceneParser> parserPlugins = new Plugins<SceneParser>(SceneParser.class);
-    public static final Plugins<BitmapReader> bitmapReaderPlugins = new Plugins<BitmapReader>(BitmapReader.class);
-    public static final Plugins<BitmapWriter> bitmapWriterPlugins = new Plugins<BitmapWriter>(BitmapWriter.class);
+    public static final Plugins<AccelerationStructure> accelPlugins = new Plugins<>(AccelerationStructure.class);
+    public static final Plugins<BucketOrder> bucketOrderPlugins = new Plugins<>(BucketOrder.class);
+    public static final Plugins<Filter> filterPlugins = new Plugins<>(Filter.class);
+    public static final Plugins<GIEngine> giEnginePlugins = new Plugins<>(GIEngine.class);
+    public static final Plugins<CausticPhotonMapInterface> causticPhotonMapPlugins = new Plugins<>(CausticPhotonMapInterface.class);
+    public static final Plugins<GlobalPhotonMapInterface> globalPhotonMapPlugins = new Plugins<>(GlobalPhotonMapInterface.class);
+    public static final Plugins<ImageSampler> imageSamplerPlugins = new Plugins<>(ImageSampler.class);
+    public static final Plugins<SceneParser> parserPlugins = new Plugins<>(SceneParser.class);
+    public static final Plugins<BitmapReader> bitmapReaderPlugins = new Plugins<>(BitmapReader.class);
+    public static final Plugins<BitmapWriter> bitmapWriterPlugins = new Plugins<>(BitmapWriter.class);
 
     // Register all plugins on startup:
     static {

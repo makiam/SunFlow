@@ -41,7 +41,7 @@ public final class GlobalPhotonMap implements GlobalPhotonMapInterface {
         numGather = options.getInt("gi.irr-cache.gmap.gather", 50);
         gatherRadius = options.getFloat("gi.irr-cache.gmap.radius", 0.5f);
         // init
-        photonList = new ArrayList<Photon>();
+        photonList = new ArrayList<>();
         photonList.add(null);
         photons = null;
         storedPhotons = halfStoredPhotons = 0;
