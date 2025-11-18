@@ -38,14 +38,14 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
     private JPanel jPanel3;
     private JScrollPane jScrollPane1;
     private JMenuItem exitMenuItem;
-    private JSeparator jSeparator2;
+
     private JPanel jPanel1;
     private JButton renderButton;
     private JMenuItem jMenuItem4;
-    private JSeparator jSeparator1;
+
     private JMenuItem fitWindowMenuItem;
     private JMenuItem tileWindowMenuItem;
-    private JSeparator jSeparator5;
+
     private JMenuItem consoleWindowMenuItem;
     private JMenuItem editorWindowMenuItem;
     private JMenuItem imageWindowMenuItem;
@@ -56,7 +56,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
     private JDesktopPane desktop;
     private JCheckBoxMenuItem smallTrianglesMenuItem;
     private JMenuItem textureCacheClearMenuItem;
-    private JSeparator jSeparator4;
+
     private JMenuItem resetZoomMenuItem;
     private JMenu imageMenu;
     private ImagePanel imagePanel;
@@ -65,7 +65,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
     private JPanel jPanel5;
     private JButton taskCancelButton;
     private JProgressBar taskProgressBar;
-    private JSeparator jSeparator3;
+
     private JCheckBoxMenuItem autoBuildMenuItem;
     private JMenuItem iprMenuItem;
     private JMenuItem renderMenuItem;
@@ -635,10 +635,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                         }
                     });
                 }
-                {
-                    jSeparator2 = new JSeparator();
-                    fileMenu.add(jSeparator2);
-                }
+                fileMenu.addSeparator();
                 {
                     exitMenuItem = new JMenuItem();
                     fileMenu.add(exitMenuItem);
@@ -674,10 +671,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                     autoBuildMenuItem.setText("Build on open");
                     autoBuildMenuItem.setSelected(true);
                 }
-                {
-                    jSeparator3 = new JSeparator();
-                    sceneMenu.add(jSeparator3);
-                }
+                sceneMenu.addSeparator();
                 {
                     renderMenuItem = new JMenuItem();
                     sceneMenu.add(renderMenuItem);
@@ -707,10 +701,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                     clearLogMenuItem.setToolTipText("Clears the console before building or rendering");
                     clearLogMenuItem.setSelected(true);
                 }
-                {
-                    jSeparator4 = new JSeparator();
-                    sceneMenu.add(jSeparator4);
-                }
+                sceneMenu.addSeparator();
                 {
                     textureCacheClearMenuItem = new JMenuItem();
                     sceneMenu.add(textureCacheClearMenuItem);
@@ -761,10 +752,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                         }
                     });
                 }
-                {
-                    jSeparator1 = new JSeparator();
-                    imageMenu.add(jSeparator1);
-                }
+                imageMenu.addSeparator();
                 {
                     jMenuItem4 = new JMenuItem();
                     imageMenu.add(jMenuItem4);
@@ -834,10 +822,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                     }
                 });
             }
-            {
-                jSeparator5 = new JSeparator();
-                windowMenu.add(jSeparator5);
-            }
+            windowMenu.addSeparator();
             {
                 tileWindowMenuItem = new JMenuItem();
                 windowMenu.add(tileWindowMenuItem);
