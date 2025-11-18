@@ -593,59 +593,34 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                     fileMenu.add(newFileMenuItem);
                     newFileMenuItem.setText("New");
                     newFileMenuItem.setAccelerator(KeyStroke.getKeyStroke("ctrl N"));
-                    newFileMenuItem.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent evt) {
-                            newFileMenuItemActionPerformed(evt);
-                        }
-                    });
+                    newFileMenuItem.addActionListener(this::newFileMenuItemActionPerformed);
                 }
                 {
                     openFileMenuItem = new JMenuItem();
                     fileMenu.add(openFileMenuItem);
                     openFileMenuItem.setText("Open ...");
                     openFileMenuItem.setAccelerator(KeyStroke.getKeyStroke("ctrl O"));
-                    openFileMenuItem.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent evt) {
-                            openFileMenuItemActionPerformed(evt);
-                        }
-                    });
+                    openFileMenuItem.addActionListener(this::openFileMenuItemActionPerformed);
                 }
                 {
                     saveMenuItem = new JMenuItem();
                     fileMenu.add(saveMenuItem);
                     saveMenuItem.setText("Save");
                     saveMenuItem.setAccelerator(KeyStroke.getKeyStroke("ctrl S"));
-                    saveMenuItem.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent evt) {
-                            saveCurrentFile(currentFile);
-                        }
-                    });
+                    saveMenuItem.addActionListener(evt -> saveCurrentFile(currentFile));
                 }
                 {
                     saveAsMenuItem = new JMenuItem();
                     fileMenu.add(saveAsMenuItem);
                     saveAsMenuItem.setText("Save As ...");
-                    saveAsMenuItem.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent evt) {
-                            saveAsMenuItemActionPerformed(evt);
-                        }
-                    });
+                    saveAsMenuItem.addActionListener(this::saveAsMenuItemActionPerformed);
                 }
                 fileMenu.addSeparator();
                 {
                     exitMenuItem = new JMenuItem();
                     fileMenu.add(exitMenuItem);
                     exitMenuItem.setText("Exit");
-                    exitMenuItem.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent evt) {
-                            System.exit(0);
-                        }
-                    });
+                    exitMenuItem.addActionListener(evt -> System.exit(0));
                 }
             }
             {
@@ -676,23 +651,13 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                     renderMenuItem = new JMenuItem();
                     sceneMenu.add(renderMenuItem);
                     renderMenuItem.setText("Render");
-                    renderMenuItem.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent evt) {
-                            renderMenuItemActionPerformed(evt);
-                        }
-                    });
+                    renderMenuItem.addActionListener(this::renderMenuItemActionPerformed);
                 }
                 {
                     iprMenuItem = new JMenuItem();
                     sceneMenu.add(iprMenuItem);
                     iprMenuItem.setText("IPR");
-                    iprMenuItem.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent evt) {
-                            iprMenuItemActionPerformed(evt);
-                        }
-                    });
+                    iprMenuItem.addActionListener(this::iprMenuItemActionPerformed);
                 }
                 {
                     clearLogMenuItem = new JCheckBoxMenuItem();
@@ -706,24 +671,14 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                     textureCacheClearMenuItem = new JMenuItem();
                     sceneMenu.add(textureCacheClearMenuItem);
                     textureCacheClearMenuItem.setText("Clear Texture Cache");
-                    textureCacheClearMenuItem.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent evt) {
-                            textureCacheClearMenuItemActionPerformed(evt);
-                        }
-                    });
+                    textureCacheClearMenuItem.addActionListener(this::textureCacheClearMenuItemActionPerformed);
                 }
                 {
                     smallTrianglesMenuItem = new JCheckBoxMenuItem();
                     sceneMenu.add(smallTrianglesMenuItem);
                     smallTrianglesMenuItem.setText("Low Mem Triangles");
                     smallTrianglesMenuItem.setToolTipText("Load future meshes using a low memory footprint triangle representation");
-                    smallTrianglesMenuItem.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent evt) {
-                            smallTrianglesMenuItemActionPerformed(evt);
-                        }
-                    });
+                    smallTrianglesMenuItem.addActionListener(this::smallTrianglesMenuItemActionPerformed);
                 }
             }
             {
@@ -734,23 +689,13 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                     resetZoomMenuItem = new JMenuItem();
                     imageMenu.add(resetZoomMenuItem);
                     resetZoomMenuItem.setText("Reset Zoom");
-                    resetZoomMenuItem.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent evt) {
-                            imagePanel.reset();
-                        }
-                    });
+                    resetZoomMenuItem.addActionListener(evt -> imagePanel.reset());
                 }
                 {
                     fitWindowMenuItem = new JMenuItem();
                     imageMenu.add(fitWindowMenuItem);
                     fitWindowMenuItem.setText("Fit to Window");
-                    fitWindowMenuItem.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent evt) {
-                            imagePanel.fit();
-                        }
-                    });
+                    fitWindowMenuItem.addActionListener(evt -> imagePanel.fit());
                 }
                 imageMenu.addSeparator();
                 {
@@ -791,36 +736,21 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                 windowMenu.add(imageWindowMenuItem);
                 imageWindowMenuItem.setText("Image");
                 imageWindowMenuItem.setAccelerator(KeyStroke.getKeyStroke("ctrl 1"));
-                imageWindowMenuItem.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent evt) {
-                        selectFrame(imagePanelFrame);
-                    }
-                });
+                imageWindowMenuItem.addActionListener(evt -> selectFrame(imagePanelFrame));
             }
             {
                 editorWindowMenuItem = new JMenuItem();
                 windowMenu.add(editorWindowMenuItem);
                 editorWindowMenuItem.setText("Script Editor");
                 editorWindowMenuItem.setAccelerator(KeyStroke.getKeyStroke("ctrl 2"));
-                editorWindowMenuItem.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent evt) {
-                        selectFrame(editorFrame);
-                    }
-                });
+                editorWindowMenuItem.addActionListener(evt -> selectFrame(editorFrame));
             }
             {
                 consoleWindowMenuItem = new JMenuItem();
                 windowMenu.add(consoleWindowMenuItem);
                 consoleWindowMenuItem.setText("Console");
                 consoleWindowMenuItem.setAccelerator(KeyStroke.getKeyStroke("ctrl 3"));
-                consoleWindowMenuItem.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent evt) {
-                        selectFrame(consoleFrame);
-                    }
-                });
+                consoleWindowMenuItem.addActionListener(evt -> selectFrame(consoleFrame));
             }
             windowMenu.addSeparator();
             {
@@ -828,12 +758,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                 windowMenu.add(tileWindowMenuItem);
                 tileWindowMenuItem.setText("Tile");
                 tileWindowMenuItem.setAccelerator(KeyStroke.getKeyStroke("ctrl T"));
-                tileWindowMenuItem.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent evt) {
-                        tileWindowMenuItemActionPerformed(evt);
-                    }
-                });
+                tileWindowMenuItem.addActionListener(this::tileWindowMenuItemActionPerformed);
             }
         }
     }
