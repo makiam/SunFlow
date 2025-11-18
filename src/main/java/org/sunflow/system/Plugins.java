@@ -101,7 +101,7 @@ public final class Plugins<T> {
             else
                 cbe.setExtendedClass(baseClass);
             cbe.cook(sourceCode);
-            return registerPlugin(name, cbe.getClazz());
+            return registerPlugin(name, (Class<? extends T>) cbe.getClazz());
         } catch (CompileException e) {
             UI.printError(Module.API, "Plugin \"%s\" could not be declared - %s", name, e.getLocalizedMessage());
             return false;
