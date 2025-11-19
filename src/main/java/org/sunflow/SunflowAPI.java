@@ -1,9 +1,6 @@
 package org.sunflow;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.StringReader;
+import java.io.*;
 import java.util.Locale;
 import org.codehaus.commons.compiler.CompileException;
 import org.codehaus.janino.ClassBodyEvaluator;
@@ -595,9 +592,12 @@ public class SunflowAPI implements SunflowAPIInterface {
             UI.printInfo(Module.API, "Compiling \"" + filename + "\" ...");
             t.start();
             try {
-                FileInputStream stream = new FileInputStream(filename);
-                api = (SunflowAPI) ClassBodyEvaluator.createFastClassBodyEvaluator(new Scanner(filename, stream), SunflowAPI.class, ClassLoader.getSystemClassLoader());
-                stream.close();
+
+                var cbe = new ClassBodyEvaluator();
+                cbe.setExtendedType(SunflowAPI.class);
+                cbe.setParentClassLoader(ClassLoader.getSystemClassLoader());
+                api = (SunflowAPI) cbe.createInstance(new FileReader(filename));
+
             } catch (CompileException e) {
                 UI.printError(Module.API, "Could not compile: \"%s\"", filename);
                 UI.printError(Module.API, "%s", e.getMessage());
@@ -640,7 +640,9 @@ public class SunflowAPI implements SunflowAPIInterface {
         try {
             Timer t = new Timer();
             t.start();
-            SunflowAPI api = (SunflowAPI) ClassBodyEvaluator.createFastClassBodyEvaluator(new Scanner(null, new StringReader(code)), SunflowAPI.class, (ClassLoader) null);
+            var cbe = new ClassBodyEvaluator();
+            cbe.setExtendedType(SunflowAPI.class);
+            SunflowAPI api = (SunflowAPI) cbe.createInstance(new StringReader(code));
             t.end();
             UI.printInfo(Module.API, "Compile time: %s", t.toString());
             return api;
