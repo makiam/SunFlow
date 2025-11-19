@@ -1,12 +1,9 @@
 package org.sunflow.system;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
-public class Parser {
+public class Parser implements Closeable {
     private FileReader file;
     private BufferedReader bf;
     private String[] lineTokens;
@@ -19,6 +16,7 @@ public class Parser {
         index = 0;
     }
 
+    @Override
     public void close() throws IOException {
         if (file != null)
             file.close();

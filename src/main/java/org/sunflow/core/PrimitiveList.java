@@ -65,5 +65,7 @@ public interface PrimitiveList extends RenderObject {
      * 
      * @return a list of baking primitives
      */
-    public PrimitiveList getBakingPrimitives();
+    default PrimitiveList getBakingPrimitives() {
+        return null;
+    }
 }

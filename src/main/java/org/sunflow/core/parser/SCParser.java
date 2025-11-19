@@ -9,6 +9,7 @@ import java.nio.FloatBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.sunflow.PluginRegistry;
 import org.sunflow.SunflowAPI;
@@ -36,10 +37,10 @@ public class SCParser implements SceneParser {
     private Parser p;
     private int numLightSamples;
     // used to generate unique names inside this parser
-    private HashMap<String, Integer> objectNames;
+    private Map<String, Integer> objectNames = new HashMap<>();
 
     public SCParser() {
-        objectNames = new HashMap<>();
+
         instanceCounter++;
         instanceNumber = instanceCounter;
     }
@@ -48,10 +49,10 @@ public class SCParser implements SceneParser {
         // generate a unique name for this class:
         int index = 1;
         Integer value = objectNames.get(prefix);
-        if (value != null) {
-            index = value;
+        if (value == null) {
             objectNames.put(prefix, index + 1);
         } else {
+            index = value;
             objectNames.put(prefix, index + 1);
         }
         return String.format("@sc_%d::%s_%d", instanceNumber, prefix, index);
@@ -70,70 +71,82 @@ public class SCParser implements SceneParser {
                 String token = p.getNextToken();
                 if (token == null)
                     break;
-                if (token.equals("image")) {
-                    UI.printInfo(Module.API, "Reading image settings ...");
-                    parseImageBlock(api);
-                } else if (token.equals("background")) {
-                    UI.printInfo(Module.API, "Reading background ...");
-                    parseBackgroundBlock(api);
-                } else if (token.equals("accel")) {
-                    UI.printInfo(Module.API, "Reading accelerator type ...");
-                    p.getNextToken();
-                    UI.printWarning(Module.API, "Setting accelerator type is not recommended - ignoring");
-                } else if (token.equals("filter")) {
-                    UI.printInfo(Module.API, "Reading image filter type ...");
-                    parseFilter(api);
-                } else if (token.equals("bucket")) {
-                    UI.printInfo(Module.API, "Reading bucket settings ...");
-                    api.parameter("bucket.size", p.getNextInt());
-                    api.parameter("bucket.order", p.getNextToken());
-                    api.options(SunflowAPI.DEFAULT_OPTIONS);
-                } else if (token.equals("photons")) {
-                    UI.printInfo(Module.API, "Reading photon settings ...");
-                    parsePhotonBlock(api);
-                } else if (token.equals("gi")) {
-                    UI.printInfo(Module.API, "Reading global illumination settings ...");
-                    parseGIBlock(api);
-                } else if (token.equals("lightserver")) {
-                    UI.printInfo(Module.API, "Reading light server settings ...");
-                    parseLightserverBlock(api);
-                } else if (token.equals("trace-depths")) {
-                    UI.printInfo(Module.API, "Reading trace depths ...");
-                    parseTraceBlock(api);
-                } else if (token.equals("camera")) {
-                    parseCamera(api);
-                } else if (token.equals("shader")) {
-                    if (!parseShader(api))
-                        return false;
-                } else if (token.equals("modifier")) {
-                    if (!parseModifier(api))
-                        return false;
-                } else if (token.equals("override")) {
-                    api.parameter("override.shader", p.getNextToken());
-                    api.parameter("override.photons", p.getNextBoolean());
-                    api.options(SunflowAPI.DEFAULT_OPTIONS);
-                } else if (token.equals("object")) {
-                    parseObjectBlock(api);
-                } else if (token.equals("instance")) {
-                    parseInstanceBlock(api);
-                } else if (token.equals("light")) {
-                    parseLightBlock(api);
-                } else if (token.equals("texturepath")) {
-                    String path = p.getNextToken();
-                    if (!new File(path).isAbsolute())
-                        path = localDir + File.separator + path;
-                    api.searchpath("texture", path);
-                } else if (token.equals("includepath")) {
-                    String path = p.getNextToken();
-                    if (!new File(path).isAbsolute())
-                        path = localDir + File.separator + path;
-                    api.searchpath("include", path);
-                } else if (token.equals("include")) {
-                    String file = p.getNextToken();
-                    UI.printInfo(Module.API, "Including: \"%s\" ...", file);
-                    api.include(file);
-                } else
-                    UI.printWarning(Module.API, "Unrecognized token %s", token);
+                switch (token) {
+                    case "image" -> {
+                        UI.printInfo(Module.API, "Reading image settings ...");
+                        parseImageBlock(api);
+                    }
+                    case "background" -> {
+                        UI.printInfo(Module.API, "Reading background ...");
+                        parseBackgroundBlock(api);
+                    }
+                    case "accel" -> {
+                        UI.printInfo(Module.API, "Reading accelerator type ...");
+                        p.getNextToken();
+                        UI.printWarning(Module.API, "Setting accelerator type is not recommended - ignoring");
+                    }
+                    case "filter" -> {
+                        UI.printInfo(Module.API, "Reading image filter type ...");
+                        parseFilter(api);
+                    }
+                    case "bucket" -> {
+                        UI.printInfo(Module.API, "Reading bucket settings ...");
+                        api.parameter("bucket.size", p.getNextInt());
+                        api.parameter("bucket.order", p.getNextToken());
+                        api.options(SunflowAPI.DEFAULT_OPTIONS);
+                    }
+                    case "photons" -> {
+                        UI.printInfo(Module.API, "Reading photon settings ...");
+                        parsePhotonBlock(api);
+                    }
+                    case "gi" -> {
+                        UI.printInfo(Module.API, "Reading global illumination settings ...");
+                        parseGIBlock(api);
+                    }
+                    case "lightserver" -> {
+                        UI.printInfo(Module.API, "Reading light server settings ...");
+                        parseLightserverBlock(api);
+                    }
+                    case "trace-depths" -> {
+                        UI.printInfo(Module.API, "Reading trace depths ...");
+                        parseTraceBlock(api);
+                    }
+                    case "camera" -> parseCamera(api);
+                    case "shader" -> {
+                        if (!parseShader(api))
+                            return false;
+                    }
+                    case "modifier" -> {
+                        if (!parseModifier(api))
+                            return false;
+                    }
+                    case "override" -> {
+                        api.parameter("override.shader", p.getNextToken());
+                        api.parameter("override.photons", p.getNextBoolean());
+                        api.options(SunflowAPI.DEFAULT_OPTIONS);
+                    }
+                    case "object" -> parseObjectBlock(api);
+                    case "instance" -> parseInstanceBlock(api);
+                    case "light" -> parseLightBlock(api);
+                    case "texturepath" -> {
+                        String path = p.getNextToken();
+                        if (!new File(path).isAbsolute())
+                            path = localDir + File.separator + path;
+                        api.searchpath("texture", path);
+                    }
+                    case "includepath" -> {
+                        String path = p.getNextToken();
+                        if (!new File(path).isAbsolute())
+                            path = localDir + File.separator + path;
+                        api.searchpath("include", path);
+                    }
+                    case "include" -> {
+                        String file = p.getNextToken();
+                        UI.printInfo(Module.API, "Including: \"%s\" ...", file);
+                        api.include(file);
+                    }
+                    default -> UI.printWarning(Module.API, "Unrecognized token %s", token);
+                }
             }
             p.close();
         } catch (ParserException e) {
