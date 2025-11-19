@@ -137,7 +137,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
         System.exit(1);
     }
 
-    public static void main(String[] args) {
+    public static void main(String... args) {
         if (args.length > 0) {
             boolean showFrame = true;
             String sampler = null;
@@ -153,8 +153,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
             int pathGI = 0;
             float maxDist = 0;
             String shaderOverride = null;
-            int resolutionW = 0;
-            int resolutionH = 0;
+            int resolutionW = 0, resolutionH = 0; 
             int aaMin = -5;
             int aaMax = -5;
             int samples = -1;
@@ -433,7 +432,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
         } else {
             try {
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            } catch (UnsupportedLookAndFeelException | IllegalAccessException | InstantiationException | ClassNotFoundException e) {
+            } catch (UnsupportedLookAndFeelException | ReflectiveOperationException e) {
                 throw new RuntimeException(e);
             }
             SunflowGUI gui = new SunflowGUI();
@@ -549,7 +548,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                 consoleFrame.setResizable(true);
                 consoleFrame.setTitle("Console");
                 {
-                    jScrollPane2 = new JScrollPane();
+                    var jScrollPane2 = new JScrollPane();
                     consoleFrame.getContentPane().add(jScrollPane2, BorderLayout.CENTER);
                     jScrollPane2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
                     jScrollPane2.setPreferredSize(new java.awt.Dimension(360, 100));

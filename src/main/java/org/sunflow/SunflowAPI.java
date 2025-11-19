@@ -61,8 +61,7 @@ public class SunflowAPI implements SunflowAPIInterface {
         if (maxMb < RECOMMENDED_MAX_SIZE)
             UI.printError(Module.API, "JVM available memory is below %d MB (found %d MB only).\nPlease make sure you launched the program with the -Xmx command line options.", RECOMMENDED_MAX_SIZE, maxMb);
         String compiler = System.getProperty("java.vm.name");
-        if (compiler == null || !(compiler.contains("HotSpot") && compiler.contains("Server")))
-            UI.printError(Module.API, "You do not appear to be running Sun's server JVM\nPerformance may suffer");
+
         UI.printDetailed(Module.API, "Java environment settings:");
         UI.printDetailed(Module.API, "  * Max memory available : %d MB", maxMb);
         UI.printDetailed(Module.API, "  * Virtual machine name : %s", compiler == null ? "<unknown" : compiler);
@@ -89,40 +88,59 @@ public class SunflowAPI implements SunflowAPIInterface {
 
     @Override
     public final void plugin(String type, String name, String code) {
-        if (type.equals("primitive"))
-            PluginRegistry.primitivePlugins.registerPlugin(name, code);
-        else if (type.equals("tesselatable"))
-            PluginRegistry.tesselatablePlugins.registerPlugin(name, code);
-        else if (type.equals("shader"))
-            PluginRegistry.shaderPlugins.registerPlugin(name, code);
-        else if (type.equals("modifier"))
-            PluginRegistry.modifierPlugins.registerPlugin(name, code);
-        else if (type.equals("camera_lens"))
-            PluginRegistry.cameraLensPlugins.registerPlugin(name, code);
-        else if (type.equals("light"))
-            PluginRegistry.lightSourcePlugins.registerPlugin(name, code);
-        else if (type.equals("accel"))
-            PluginRegistry.accelPlugins.registerPlugin(name, code);
-        else if (type.equals("bucket_order"))
-            PluginRegistry.bucketOrderPlugins.registerPlugin(name, code);
-        else if (type.equals("filter"))
-            PluginRegistry.filterPlugins.registerPlugin(name, code);
-        else if (type.equals("gi_engine"))
-            PluginRegistry.giEnginePlugins.registerPlugin(name, code);
-        else if (type.equals("caustic_photon_map"))
-            PluginRegistry.causticPhotonMapPlugins.registerPlugin(name, code);
-        else if (type.equals("global_photon_map"))
-            PluginRegistry.globalPhotonMapPlugins.registerPlugin(name, code);
-        else if (type.equals("image_sampler"))
-            PluginRegistry.imageSamplerPlugins.registerPlugin(name, code);
-        else if (type.equals("parser"))
-            PluginRegistry.parserPlugins.registerPlugin(name, code);
-        else if (type.equals("bitmap_reader"))
-            PluginRegistry.bitmapReaderPlugins.registerPlugin(name, code);
-        else if (type.equals("bitmap_writer"))
-            PluginRegistry.bitmapWriterPlugins.registerPlugin(name, code);
-        else
-            UI.printWarning(Module.API, "Unrecognized plugin type: \"%s\" - ignoring declaration of \"%s\"", type, name);
+        switch (type) {
+            case "primitive":
+                PluginRegistry.primitivePlugins.registerPlugin(name, code);
+                break;
+            case "tesselatable":
+                PluginRegistry.tesselatablePlugins.registerPlugin(name, code);
+                break;
+            case "shader":
+                PluginRegistry.shaderPlugins.registerPlugin(name, code);
+                break;
+            case "modifier":
+                PluginRegistry.modifierPlugins.registerPlugin(name, code);
+                break;
+            case "camera_lens":
+                PluginRegistry.cameraLensPlugins.registerPlugin(name, code);
+                break;
+            case "light":
+                PluginRegistry.lightSourcePlugins.registerPlugin(name, code);
+                break;
+            case "accel":
+                PluginRegistry.accelPlugins.registerPlugin(name, code);
+                break;
+            case "bucket_order":
+                PluginRegistry.bucketOrderPlugins.registerPlugin(name, code);
+                break;
+            case "filter":
+                PluginRegistry.filterPlugins.registerPlugin(name, code);
+                break;
+            case "gi_engine":
+                PluginRegistry.giEnginePlugins.registerPlugin(name, code);
+                break;
+            case "caustic_photon_map":
+                PluginRegistry.causticPhotonMapPlugins.registerPlugin(name, code);
+                break;
+            case "global_photon_map":
+                PluginRegistry.globalPhotonMapPlugins.registerPlugin(name, code);
+                break;
+            case "image_sampler":
+                PluginRegistry.imageSamplerPlugins.registerPlugin(name, code);
+                break;
+            case "parser":
+                PluginRegistry.parserPlugins.registerPlugin(name, code);
+                break;
+            case "bitmap_reader":
+                PluginRegistry.bitmapReaderPlugins.registerPlugin(name, code);
+                break;
+            case "bitmap_writer":
+                PluginRegistry.bitmapWriterPlugins.registerPlugin(name, code);
+                break;
+            default:
+                UI.printWarning(Module.API, "Unrecognized plugin type: \"%s\" - ignoring declaration of \"%s\"", type, name);
+                break;
+        }
     }
 
     @Override
@@ -156,8 +174,7 @@ public class SunflowAPI implements SunflowAPIInterface {
 
     @Override
     public final void parameter(String name, Point3 value) {
-        parameterList.addPoints(name, InterpolationType.NONE, new float[] {
-                value.x, value.y, value.z });
+        parameterList.addPoints(name, InterpolationType.NONE, new float[] {value.x, value.y, value.z });
     }
 
     @Override
