@@ -25,7 +25,7 @@ public class Texture {
     private int loaded;
 
     /**
-     * Creates a new texture from the specfied file.
+     * Creates a new texture from the specified file.
      * 
      * @param filename image file to load
      * @param isLinear is the texture gamma corrected already?

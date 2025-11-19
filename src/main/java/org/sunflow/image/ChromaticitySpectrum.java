@@ -48,7 +48,7 @@ public final class ChromaticitySpectrum extends SpectralCurve {
         return kS0Spectrum.sample(lambda) + M1 * kS1Spectrum.sample(lambda) + M2 * kS2Spectrum.sample(lambda);
     }
 
-    public static final XYZColor get(float x, float y) {
+    public static XYZColor get(float x, float y) {
         float M1 = (-1.3515f - 1.7703f * x + 5.9114f * y) / (0.0241f + 0.2562f * x - 0.7341f * y);
         float M2 = (0.03f - 31.4424f * x + 30.0717f * y) / (0.0241f + 0.2562f * x - 0.7341f * y);
         float X = S0xyz.getX() + M1 * S1xyz.getX() + M2 * S2xyz.getX();

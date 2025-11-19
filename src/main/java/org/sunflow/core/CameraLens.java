@@ -8,7 +8,7 @@ public interface CameraLens extends RenderObject {
     /**
      * Create a new {@link Ray ray}to be cast through pixel (x,y) on the image
      * plane. Two sampling parameters are provided for lens sampling. They are
-     * guarenteed to be in the interval [0,1). They can be used to perturb the
+     * guaranteed to be in the interval [0,1). They can be used to perturb the
      * position of the source of the ray on the lens of the camera for DOF
      * effects. A third sampling parameter is provided for motion blur effects.
      * Note that the {@link Camera} class already handles camera movement motion

@@ -9,7 +9,7 @@ import org.sunflow.system.UI.Module;
 
 /**
  * This class represent a geometric object in its native object space. These
- * object are not rendered directly, they must be instanced via {@link Instance}.
+ * objects are not rendered directly, they must be instanced via {@link Instance}.
  * This class performs all the bookkeeping needed for on-demand tesselation and
  * acceleration structure building.
  */

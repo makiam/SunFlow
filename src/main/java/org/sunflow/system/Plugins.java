@@ -66,7 +66,7 @@ public final class Plugins<T> {
     /**
      * Generate a unique plugin type name which has not yet been registered.
      * This is meant to be used when the actual type name is not crucial, but
-     * succesfully registration is.
+     * successfully registration is.
      * 
      * @param prefix a prefix to be used in generating the unique name
      * @return a unique plugin type name not yet in use
@@ -83,7 +83,7 @@ public final class Plugins<T> {
      * import declarations and a class body only. The implemented type is
      * implicitly the one of the plugin list being registered against.If the
      * plugin type name was previously associated with a different class, it
-     * will be overriden. This allows the behavior core classes to be modified
+     * will be overridden. This allows the behavior core classes to be modified
      * at runtime.
      * 
      * @param name plugin type name

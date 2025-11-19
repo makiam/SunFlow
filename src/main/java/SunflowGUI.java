@@ -47,19 +47,15 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
     private JButton renderButton;
 
 
-    private JMenuItem fitWindowMenuItem;
     private JMenuItem tileWindowMenuItem;
 
-    private JMenuItem consoleWindowMenuItem;
-    private JMenuItem editorWindowMenuItem;
-    private JMenuItem imageWindowMenuItem;
-    private JMenu windowMenu;
+
     private JInternalFrame consoleFrame;
     private JInternalFrame editorFrame;
     private JInternalFrame imagePanelFrame;
     private JDesktopPane desktop;
     private JCheckBoxMenuItem smallTrianglesMenuItem;
-    private JMenuItem textureCacheClearMenuItem;
+
 
 
     private JMenu imageMenu;
@@ -75,7 +71,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
     private JMenu sceneMenu;
     private RSyntaxTextArea editorTextArea;
     private JTextArea consoleTextArea;
-    private JButton clearConsoleButton;
+
 
     private JButton iprButton;
     private JButton buildButton;
@@ -83,7 +79,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
     private JMenuItem saveMenuItem;
     private JMenuItem openFileMenuItem;
     private JMenuItem newFileMenuItem;
-    private JMenu fileMenu;
+
 
     // non-swing items
     private String currentFile;
@@ -582,17 +578,16 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                         jPanel5.setLayout(jPanel5Layout);
                         jPanel4.add(jPanel5, BorderLayout.EAST);
                         {
-                            taskCancelButton = new JButton();
+                            taskCancelButton = new JButton("Cancel");
                             jPanel5.add(taskCancelButton);
-                            taskCancelButton.setText("Cancel");
                             taskCancelButton.setEnabled(false);
                             taskCancelButton.addActionListener(evt -> UI.taskCancel());
                         }
                         {
-                            clearConsoleButton = new JButton();
-                            jPanel5.add(clearConsoleButton);
-                            clearConsoleButton.setText("Clear");
+                            var clearConsoleButton = new JButton("Clear");
                             clearConsoleButton.addActionListener(evt -> clearConsole());
+                            jPanel5.add(clearConsoleButton);
+
                         }
                     }
                 }
@@ -604,7 +599,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
             var menuBar = new JMenuBar();
             setJMenuBar(menuBar);
             {
-                fileMenu = new JMenu("File");
+                var fileMenu = new JMenu("File");
                 menuBar.add(fileMenu);
 
                 {
@@ -665,16 +660,13 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                     clearLogMenuItem.setSelected(true);
                 }
                 sceneMenu.addSeparator();
+
+                sceneMenu.add(new JMenuItem("Clear Texture Cache")).addActionListener(this::textureCacheClearMenuItemActionPerformed);
+
                 {
-                    textureCacheClearMenuItem = new JMenuItem();
-                    sceneMenu.add(textureCacheClearMenuItem);
-                    textureCacheClearMenuItem.setText("Clear Texture Cache");
-                    textureCacheClearMenuItem.addActionListener(this::textureCacheClearMenuItemActionPerformed);
-                }
-                {
-                    smallTrianglesMenuItem = new JCheckBoxMenuItem();
+                    smallTrianglesMenuItem = new JCheckBoxMenuItem("Low Mem Triangles");
                     sceneMenu.add(smallTrianglesMenuItem);
-                    smallTrianglesMenuItem.setText("Low Mem Triangles");
+
                     smallTrianglesMenuItem.setToolTipText("Load future meshes using a low memory footprint triangle representation");
                     smallTrianglesMenuItem.addActionListener(this::smallTrianglesMenuItemActionPerformed);
                 }
@@ -686,12 +678,9 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
 
                 imageMenu.add(new JMenuItem("Reset Zoom")).addActionListener(evt -> imagePanel.reset());
 
-                {
-                    fitWindowMenuItem = new JMenuItem();
-                    imageMenu.add(fitWindowMenuItem);
-                    fitWindowMenuItem.setText("Fit to Window");
-                    fitWindowMenuItem.addActionListener(evt -> imagePanel.fit());
-                }
+                imageMenu.add(new JMenuItem("Fit to Window")).addActionListener(evt -> imagePanel.fit());
+
+
                 imageMenu.addSeparator();
                 {
                     var imgSaveMenuItem = new JMenuItem();
@@ -721,28 +710,23 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                     });
                 }
             }
-            {
-                windowMenu = new JMenu("Window");
-                menuBar.add(windowMenu);
 
-            }
-            {
-                imageWindowMenuItem = new JMenuItem("Image");
-                imageWindowMenuItem.setAccelerator(KeyStroke.getKeyStroke("ctrl 1"));
-                imageWindowMenuItem.addActionListener(evt -> selectFrame(imagePanelFrame));
-                windowMenu.add(imageWindowMenuItem);
+            var windowMenu = new JMenu("Window");
+            menuBar.add(windowMenu);
+
+            var imageWindowMenuItem = new JMenuItem("Image");
+            imageWindowMenuItem.setAccelerator(KeyStroke.getKeyStroke("ctrl 1"));
+            imageWindowMenuItem.addActionListener(evt -> selectFrame(imagePanelFrame));
+            windowMenu.add(imageWindowMenuItem);
 
 
-            }
-            {
-                editorWindowMenuItem = new JMenuItem("Script Editor");
-                windowMenu.add(editorWindowMenuItem);
+            var editorWindowMenuItem = new JMenuItem("Script Editor");
+            windowMenu.add(editorWindowMenuItem);
 
-                editorWindowMenuItem.setAccelerator(KeyStroke.getKeyStroke("ctrl 2"));
-                editorWindowMenuItem.addActionListener(evt -> selectFrame(editorFrame));
-            }
+            editorWindowMenuItem.setAccelerator(KeyStroke.getKeyStroke("ctrl 2"));
+            editorWindowMenuItem.addActionListener(evt -> selectFrame(editorFrame));
             {
-                consoleWindowMenuItem = new JMenuItem("Console");
+                var consoleWindowMenuItem = new JMenuItem("Console");
                 windowMenu.add(consoleWindowMenuItem);
 
                 consoleWindowMenuItem.setAccelerator(KeyStroke.getKeyStroke("ctrl 3"));
@@ -750,9 +734,9 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
             }
             windowMenu.addSeparator();
             {
-                tileWindowMenuItem = new JMenuItem();
+                tileWindowMenuItem = new JMenuItem("Tile");
                 windowMenu.add(tileWindowMenuItem);
-                tileWindowMenuItem.setText("Tile");
+
                 tileWindowMenuItem.setAccelerator(KeyStroke.getKeyStroke("ctrl T"));
                 tileWindowMenuItem.addActionListener(this::tileWindowMenuItemActionPerformed);
             }

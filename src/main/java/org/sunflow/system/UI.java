@@ -29,7 +29,7 @@ public final class UI {
      * Sets the active user interface implementation. Passing <code>null</code>
      * silences printing completely.
      * 
-     * @param ui object to recieve all user interface calls
+     * @param ui object to receive all user interface calls
      */
     public final static void set(UserInterface ui) {
         if (ui == null)
@@ -95,7 +95,7 @@ public final class UI {
      * @return <code>true</code> if the current task should be stopped,
      *         <code>false</code> otherwise
      */
-    public final static synchronized boolean taskCanceled() {
+    public static synchronized boolean taskCanceled() {
         if (canceled)
             printInfo(Module.GUI, "Abort request noticed by the current task");
         return canceled;

@@ -6,7 +6,7 @@ import org.sunflow.math.Vector3;
 
 /**
  * This class represents a ray as a oriented half line segment. The ray
- * direction is always normalized. The valid region is delimted by two distances
+ * direction is always normalized. The valid region is delimited by two distances
  * along the ray, tMin and tMax.
  */
 public final class Ray {
