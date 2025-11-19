@@ -7,10 +7,10 @@ import java.awt.datatransfer.Transferable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
-import java.io.BufferedReader;
+
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -42,10 +42,10 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
     private static final int DEFAULT_WIDTH = 1024;
     private static final int DEFAULT_HEIGHT = 768;
 
-    private JMenuItem exitMenuItem;
+
 
     private JButton renderButton;
-    private JMenuItem jMenuItem4;
+
 
     private JMenuItem fitWindowMenuItem;
     private JMenuItem tileWindowMenuItem;
@@ -61,7 +61,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
     private JCheckBoxMenuItem smallTrianglesMenuItem;
     private JMenuItem textureCacheClearMenuItem;
 
-    private JMenuItem resetZoomMenuItem;
+
     private JMenu imageMenu;
     private ImagePanel imagePanel;
     private JCheckBoxMenuItem clearLogMenuItem;
@@ -69,14 +69,14 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
     private JProgressBar taskProgressBar;
 
     private JCheckBoxMenuItem autoBuildMenuItem;
-    private JMenuItem iprMenuItem;
-    private JMenuItem renderMenuItem;
+
+
     private JMenuItem buildMenuItem;
     private JMenu sceneMenu;
     private RSyntaxTextArea editorTextArea;
     private JTextArea consoleTextArea;
     private JButton clearConsoleButton;
-    private JScrollPane jScrollPane2;
+
     private JButton iprButton;
     private JButton buildButton;
     private JMenuItem saveAsMenuItem;
@@ -509,20 +509,15 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                 editorFrame.setResizable(true);
                 editorFrame.setIconifiable(true);
                 {
-                    var jScrollPane1 = new RTextScrollPane();
-                    editorFrame.getContentPane().add(jScrollPane1, BorderLayout.CENTER);
-                    jScrollPane1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-                    jScrollPane1.setPreferredSize(new java.awt.Dimension(360, 280));
-                    {
-                        editorTextArea = new RSyntaxTextArea(20, 60);
-                        editorTextArea.setAnimateBracketMatching(false);
-                        editorTextArea.setCodeFoldingEnabled(true);
-                        editorTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
-                        jScrollPane1.setViewportView(editorTextArea);
-                        editorTextArea.setFont(new java.awt.Font("Monospaced", 0, 12));
-                        // drag and drop
-                        editorTextArea.setTransferHandler(new SceneTransferHandler());
-                    }
+                    editorTextArea = new RSyntaxTextArea(20, 60);
+                    editorTextArea.setAnimateBracketMatching(false);
+                    editorTextArea.setCodeFoldingEnabled(true);
+                    editorTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
+
+                    editorTextArea.setFont(new java.awt.Font("Monospaced", 0, 13));
+                    // drag and drop
+                    editorTextArea.setTransferHandler(new SceneTransferHandler());
+                    editorFrame.getContentPane().add(new RTextScrollPane(editorTextArea), BorderLayout.CENTER);
                 }
                 {
                     JPanel jPanel3 = new JPanel();
@@ -531,10 +526,11 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                     jPanel3Layout.setAlignment(FlowLayout.RIGHT);
                     jPanel3.setLayout(jPanel3Layout);
                     {
-                        buildButton = new JButton();
-                        jPanel3.add(buildButton);
-                        buildButton.setText("Build Scene");
+                        buildButton = new JButton("Build Scene");
                         buildButton.addActionListener(this::buildMenuItemActionPerformed);
+                        jPanel3.add(buildButton);
+
+
                     }
                 }
                 editorFrame.pack();
@@ -608,43 +604,34 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
             var menuBar = new JMenuBar();
             setJMenuBar(menuBar);
             {
-                fileMenu = new JMenu();
+                fileMenu = new JMenu("File");
                 menuBar.add(fileMenu);
-                fileMenu.setText("File");
+
                 {
-                    newFileMenuItem = new JMenuItem();
-                    fileMenu.add(newFileMenuItem);
-                    newFileMenuItem.setText("New");
+                    newFileMenuItem = new JMenuItem("New");
                     newFileMenuItem.setAccelerator(KeyStroke.getKeyStroke("ctrl N"));
                     newFileMenuItem.addActionListener(this::newFileMenuItemActionPerformed);
+                    fileMenu.add(newFileMenuItem);
+
                 }
                 {
-                    openFileMenuItem = new JMenuItem();
-                    fileMenu.add(openFileMenuItem);
-                    openFileMenuItem.setText("Open ...");
+                    openFileMenuItem = new JMenuItem("Open...");
                     openFileMenuItem.setAccelerator(KeyStroke.getKeyStroke("ctrl O"));
                     openFileMenuItem.addActionListener(this::openFileMenuItemActionPerformed);
+                    fileMenu.add(openFileMenuItem);
+
                 }
                 {
-                    saveMenuItem = new JMenuItem();
-                    fileMenu.add(saveMenuItem);
-                    saveMenuItem.setText("Save");
+                    saveMenuItem = new JMenuItem("Save");
                     saveMenuItem.setAccelerator(KeyStroke.getKeyStroke("ctrl S"));
                     saveMenuItem.addActionListener(evt -> saveCurrentFile(currentFile));
+                    fileMenu.add(saveMenuItem);
+
                 }
-                {
-                    saveAsMenuItem = new JMenuItem();
-                    fileMenu.add(saveAsMenuItem);
-                    saveAsMenuItem.setText("Save As ...");
-                    saveAsMenuItem.addActionListener(this::saveAsMenuItemActionPerformed);
-                }
+                saveAsMenuItem = new JMenuItem("Save As...");
+                fileMenu.add(saveAsMenuItem).addActionListener(this::saveAsMenuItemActionPerformed);
                 fileMenu.addSeparator();
-                {
-                    exitMenuItem = new JMenuItem();
-                    fileMenu.add(exitMenuItem);
-                    exitMenuItem.setText("Exit");
-                    exitMenuItem.addActionListener(evt -> System.exit(0));
-                }
+                fileMenu.add(new JMenuItem("Exit")).addActionListener(evt -> System.exit(0));
             }
             {
                 sceneMenu = new JMenu();
@@ -667,18 +654,9 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                     autoBuildMenuItem.setSelected(true);
                 }
                 sceneMenu.addSeparator();
-                {
-                    renderMenuItem = new JMenuItem();
-                    sceneMenu.add(renderMenuItem);
-                    renderMenuItem.setText("Render");
-                    renderMenuItem.addActionListener(this::renderMenuItemActionPerformed);
-                }
-                {
-                    iprMenuItem = new JMenuItem();
-                    sceneMenu.add(iprMenuItem);
-                    iprMenuItem.setText("IPR");
-                    iprMenuItem.addActionListener(this::iprMenuItemActionPerformed);
-                }
+                sceneMenu.add(new JMenuItem("Render")).addActionListener(this::renderMenuItemActionPerformed);
+                sceneMenu.add(new JMenuItem("IPR")).addActionListener(this::iprMenuItemActionPerformed);
+
                 {
                     clearLogMenuItem = new JCheckBoxMenuItem();
                     sceneMenu.add(clearLogMenuItem);
@@ -705,12 +683,9 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                 imageMenu = new JMenu();
                 menuBar.add(imageMenu);
                 imageMenu.setText("Image");
-                {
-                    resetZoomMenuItem = new JMenuItem();
-                    imageMenu.add(resetZoomMenuItem);
-                    resetZoomMenuItem.setText("Reset Zoom");
-                    resetZoomMenuItem.addActionListener(evt -> imagePanel.reset());
-                }
+
+                imageMenu.add(new JMenuItem("Reset Zoom")).addActionListener(evt -> imagePanel.reset());
+
                 {
                     fitWindowMenuItem = new JMenuItem();
                     imageMenu.add(fitWindowMenuItem);
@@ -719,10 +694,10 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                 }
                 imageMenu.addSeparator();
                 {
-                    jMenuItem4 = new JMenuItem();
-                    imageMenu.add(jMenuItem4);
-                    jMenuItem4.setText("Save Image ...");
-                    jMenuItem4.addActionListener(new ActionListener() {
+                    var imgSaveMenuItem = new JMenuItem();
+                    imageMenu.add(imgSaveMenuItem);
+                    imgSaveMenuItem.setText("Save Image ...");
+                    imgSaveMenuItem.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent evt) {
                             // imagePanel.image;
@@ -747,28 +722,29 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                 }
             }
             {
-                windowMenu = new JMenu();
+                windowMenu = new JMenu("Window");
                 menuBar.add(windowMenu);
-                windowMenu.setText("Window");
+
             }
             {
-                imageWindowMenuItem = new JMenuItem();
-                windowMenu.add(imageWindowMenuItem);
-                imageWindowMenuItem.setText("Image");
+                imageWindowMenuItem = new JMenuItem("Image");
                 imageWindowMenuItem.setAccelerator(KeyStroke.getKeyStroke("ctrl 1"));
                 imageWindowMenuItem.addActionListener(evt -> selectFrame(imagePanelFrame));
+                windowMenu.add(imageWindowMenuItem);
+
+
             }
             {
-                editorWindowMenuItem = new JMenuItem();
+                editorWindowMenuItem = new JMenuItem("Script Editor");
                 windowMenu.add(editorWindowMenuItem);
-                editorWindowMenuItem.setText("Script Editor");
+
                 editorWindowMenuItem.setAccelerator(KeyStroke.getKeyStroke("ctrl 2"));
                 editorWindowMenuItem.addActionListener(evt -> selectFrame(editorFrame));
             }
             {
-                consoleWindowMenuItem = new JMenuItem();
+                consoleWindowMenuItem = new JMenuItem("Console");
                 windowMenu.add(consoleWindowMenuItem);
-                consoleWindowMenuItem.setText("Console");
+
                 consoleWindowMenuItem.setAccelerator(KeyStroke.getKeyStroke("ctrl 3"));
                 consoleWindowMenuItem.addActionListener(evt -> selectFrame(consoleFrame));
             }
@@ -1075,6 +1051,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
             }
             // load went ok, use filename as current
             currentFile = filename;
+            editorFrame.setTitle("Script: "+ filename);
             UI.printInfo(Module.GUI, "Loaded script: \"%s\"", filename);
         } else if (filename.endsWith(".sc")) {
             String template = "import org.sunflow.core.*;\nimport org.sunflow.core.accel.*;\nimport org.sunflow.core.camera.*;\nimport org.sunflow.core.primitive.*;\nimport org.sunflow.core.shader.*;\nimport org.sunflow.image.Color;\nimport org.sunflow.math.*;\n\npublic void build() {\n  include(\"" + filename.replace("\\", "\\\\") + "\");\n}\n";
@@ -1091,6 +1068,7 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
             // try to compile the code we just loaded
             buildMenuItemActionPerformed(null);
         }
+
 
     }
 
