@@ -213,18 +213,14 @@ public class SunflowAPI implements SunflowAPIInterface {
             UI.printError(Module.API, "Unknown interpolation type: %s -- ignoring parameter \"%s\"", interpolation, name);
             return;
         }
-        if (type.equals("float"))
-            parameterList.addFloats(name, interp, data);
-        else if (type.equals("point"))
-            parameterList.addPoints(name, interp, data);
-        else if (type.equals("vector"))
-            parameterList.addVectors(name, interp, data);
-        else if (type.equals("texcoord"))
-            parameterList.addTexCoords(name, interp, data);
-        else if (type.equals("matrix"))
-            parameterList.addMatrices(name, interp, data);
-        else
-            UI.printError(Module.API, "Unknown parameter type: %s -- ignoring parameter \"%s\"", type, name);
+        switch (type) {
+            case "float" -> parameterList.addFloats(name, interp, data);
+            case "point" -> parameterList.addPoints(name, interp, data);
+            case "vector" -> parameterList.addVectors(name, interp, data);
+            case "texcoord" -> parameterList.addTexCoords(name, interp, data);
+            case "matrix" -> parameterList.addMatrices(name, interp, data);
+            default -> UI.printError(Module.API, "Unknown parameter type: %s -- ignoring parameter \"%s\"", type, name);
+        }
     }
 
     @Override
@@ -233,12 +229,12 @@ public class SunflowAPI implements SunflowAPIInterface {
     }
 
     /**
-     * Update the specfied object using the currently active parameter list. The
+     * Update the specified object using the currently active parameter list. The
      * object is removed if the update fails to avoid leaving inconsistently set
      * objects in the list.
      * 
      * @param name name of the object to update
-     * @return <code>true</code> if the update was succesfull, or
+     * @return <code>true</code> if the update was successful, or
      *         <code>false</code> if the update failed
      */
     private boolean update(String name) {
@@ -254,7 +250,7 @@ public class SunflowAPI implements SunflowAPIInterface {
         else if (type.equals("texture"))
             textureSearchPath.addSearchPath(path);
         else
-            UI.printWarning(Module.API, "Invalid searchpath type: \"%s\"", type);
+            UI.printWarning(Module.API, "Invalid search path type: \"%s\"", type);
     }
 
     /**
@@ -585,7 +581,7 @@ public class SunflowAPI implements SunflowAPIInterface {
     }
 
     /**
-     * This method does nothing, but may be overriden to create scenes
+     * This method does nothing, but may be overridden to create scenes
      * procedurally.
      */
     public void build() {
@@ -595,7 +591,7 @@ public class SunflowAPI implements SunflowAPIInterface {
      * Create an API object from the specified file. Java files are read by
      * Janino and are expected to implement a build method (they implement a
      * derived class of SunflowAPI. The build method is called if the code
-     * compiles succesfully. Other files types are handled by the parse method.
+     * compiles successfully. Other files types are handled by the parse method.
      * 
      * @param filename filename to load
      * @return a valid SunflowAPI object or <code>null</code> on failure
@@ -650,7 +646,7 @@ public class SunflowAPI implements SunflowAPIInterface {
      * output, it is up the caller to do so.
      * 
      * @param code java code string
-     * @return a valid SunflowAPI object upon succes, <code>null</code>
+     * @return a valid SunflowAPI object upon success, <code>null</code>
      *         otherwise.
      */
     public static SunflowAPI compile(String code) {
@@ -675,7 +671,7 @@ public class SunflowAPI implements SunflowAPIInterface {
     /**
      * Read the value of the current frame. This value is intended only for
      * procedural animation creation. It is not used by the Sunflow core in
-     * anyway. The default value is 1.
+     * any way. The default value is 1.
      * 
      * @return current frame number
      */

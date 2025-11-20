@@ -67,7 +67,6 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
     private JCheckBoxMenuItem autoBuildMenuItem;
 
 
-    private JMenuItem buildMenuItem;
     private JMenu sceneMenu;
     private RSyntaxTextArea editorTextArea;
     private JTextArea consoleTextArea;
@@ -474,15 +473,15 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                     jPanel1.setLayout(jPanel1Layout);
                     imagePanelFrame.getContentPane().add(jPanel1, BorderLayout.NORTH);
                     {
-                        renderButton = new JButton();
+                        renderButton = new JButton("Render");
                         jPanel1.add(renderButton);
-                        renderButton.setText("Render");
+
                         renderButton.addActionListener(this::renderMenuItemActionPerformed);
                     }
                     {
-                        iprButton = new JButton();
+                        iprButton = new JButton("IPR");
                         jPanel1.add(iprButton);
-                        iprButton.setText("IPR");
+
                         iprButton.addActionListener(this::iprMenuItemActionPerformed);
                     }
                 }
@@ -629,13 +628,12 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                 fileMenu.add(new JMenuItem("Exit")).addActionListener(evt -> System.exit(0));
             }
             {
-                sceneMenu = new JMenu();
+                sceneMenu = new JMenu("Scene");
                 menuBar.add(sceneMenu);
-                sceneMenu.setText("Scene");
                 {
-                    buildMenuItem = new JMenuItem();
+                    var buildMenuItem = new JMenuItem("Build");
                     sceneMenu.add(buildMenuItem);
-                    buildMenuItem.setText("Build");
+
                     buildMenuItem.setAccelerator(KeyStroke.getKeyStroke("ctrl B"));
                     buildMenuItem.addActionListener(evt -> {
                         if (sceneMenu.isEnabled())
@@ -643,9 +641,8 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                     });
                 }
                 {
-                    autoBuildMenuItem = new JCheckBoxMenuItem();
+                    autoBuildMenuItem = new JCheckBoxMenuItem("Build on open");
                     sceneMenu.add(autoBuildMenuItem);
-                    autoBuildMenuItem.setText("Build on open");
                     autoBuildMenuItem.setSelected(true);
                 }
                 sceneMenu.addSeparator();
@@ -653,9 +650,9 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                 sceneMenu.add(new JMenuItem("IPR")).addActionListener(this::iprMenuItemActionPerformed);
 
                 {
-                    clearLogMenuItem = new JCheckBoxMenuItem();
+                    clearLogMenuItem = new JCheckBoxMenuItem("Auto Clear Log");
                     sceneMenu.add(clearLogMenuItem);
-                    clearLogMenuItem.setText("Auto Clear Log");
+
                     clearLogMenuItem.setToolTipText("Clears the console before building or rendering");
                     clearLogMenuItem.setSelected(true);
                 }
@@ -672,20 +669,18 @@ public class SunflowGUI extends javax.swing.JFrame implements UserInterface {
                 }
             }
             {
-                imageMenu = new JMenu();
+                imageMenu = new JMenu("Image");
                 menuBar.add(imageMenu);
-                imageMenu.setText("Image");
 
                 imageMenu.add(new JMenuItem("Reset Zoom")).addActionListener(evt -> imagePanel.reset());
-
                 imageMenu.add(new JMenuItem("Fit to Window")).addActionListener(evt -> imagePanel.fit());
 
 
                 imageMenu.addSeparator();
                 {
-                    var imgSaveMenuItem = new JMenuItem();
+                    var imgSaveMenuItem = new JMenuItem("Save Image...");
                     imageMenu.add(imgSaveMenuItem);
-                    imgSaveMenuItem.setText("Save Image ...");
+
                     imgSaveMenuItem.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent evt) {
